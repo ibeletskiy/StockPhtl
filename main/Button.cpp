@@ -77,5 +77,3 @@ void Button::draw(RenderWindow& window) {
 	title_.setFont(font);
 	window.draw(title_);
 }
-
-//something
