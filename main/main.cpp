@@ -14,16 +14,32 @@ public:
 		*this = other;
 	}
 
-	int getCost() {
+	int getActual() const {
 		return actual_;
 	}
 
-	bool isDiscount() {
+	bool isDiscount() const {
 		return (actual_ == discount_);
 	}
 
 	void setDiscount() {
+		actual_ = discount_;
+	}
 
+	double getInterest() const {
+		return interest_;
+	}
+
+	int getNumber() const {
+		return number_;
+	}
+
+	int getDuration() const {
+		return duration_;
+	}
+	
+	int getPrice() const {
+		return price_;
 	}
 
 protected:
@@ -43,6 +59,18 @@ class Package : public Item {
 public:
 	Package(int count_, Item& item) : count_(count_), Item(item) {}
 
+	int getCount() const {
+		return count_;
+	}
+
+	void setCount(int val) {
+		count_ = val;
+	}
+
+	void addCount(int val) {
+		count_ += val;
+	}
+
 private:
 	int count_;
 };
@@ -53,25 +81,25 @@ public:
 		customer_count = 100;
 		for (Package package : basic_shelf) {
 			shelf.push_back(package);
-			max_count.push_back(customer_count * package.interest_ * package.duration_);
+			max_count.push_back(customer_count * package.getInterest() * package.getDuration());
 		}
 	}
 
 	void GetProducts(std::vector<Package>& input) {
 		for (Package package : input) {
-			shelf[package.number_].count_ += package.number_;
+			shelf[package.getNumber()].addCount(package.getCount());
 		}
 	}
 
 	std::vector<int> GetOrderList(std::vector<std::pair<Package, int>>& prices) {
 		std::vector <int> order;
 		for (auto& package : prices) {
-			int number = package.first.number_;
-			if (package.first.price_ == package.second) {
-				order.push_back(std::max(0.0, max_count[number] * 0.8 - shelf[number].count_));
+			int number = package.first.getNumber();
+			if (package.first.getPrice() == package.second) {
+				order.push_back(std::max(0.0, max_count[number] * 0.8 - shelf[number].getCount()));
 			}
 			else {
-				order.push_back(max_count[number] - shelf[number].count_);
+				order.push_back(max_count[number] - shelf[number].getCount());
 			}
 		}
 		return order;
@@ -79,7 +107,7 @@ public:
 
 	void PerformDay() {
 		for (Package& package : shelf) {
-			package.count_ = std::max(0.0, package.count_ - customer_count * package.interest_);
+			package.setCount(std::max(0.0, package.getCount() - customer_count * package.getInterest()));
 		}
 	}
 

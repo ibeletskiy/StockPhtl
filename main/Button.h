@@ -20,12 +20,7 @@ public:
 	bool rightPressed(Vector2i& mouse, Event now);
 	void setBacklight(int value, int thickness, Color color = Color::White);
 	void setOutline(Color color, int thickness);
-
-	void draw(RenderWindow& window) {
-		window.draw(field_);
-		title_.setFont(font);
-		window.draw(title_);
-	}
+	void draw(RenderWindow& window);
 
 protected:
 	Text title_;
