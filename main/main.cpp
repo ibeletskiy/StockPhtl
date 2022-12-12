@@ -159,12 +159,17 @@ class Provider {
 			if (order[i].getCount() == 0) continue;
 			int date = day_;
 			if (item_queue_[i].empty()) {
-				date += 2;
+				date += 1;
 			}
 			else {
-				date += 2;
+				date = item_queue_[i].back().getLastDay() + 1;
 			}
 			Package package = order[i];
+			package.setCount(volume_[i]);
+			package.setLastDay(date);
+			for (int j = 0; j < order[i].getCount(); ++j) {
+				item_queue_[i].push(package);
+			}
 		}
 	}
 
