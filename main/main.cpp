@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include <queue>
 #include <SFML/Graphics.hpp>
 
 class Item {
@@ -118,14 +119,26 @@ private:
 };
 
 class Provider {
-	Provider() {
+	Provider(std::vector<Package>& basic_shelf) {
+		for (auto package : basic_shelf) {
+			volume_.push_back(package.getCount());
+		}
+		day_ = 0;
+	}
 
+	void getOrder(std::vector<Package>& order) {
+		for (int i = 0; i < order.size(); ++i) {
+
+		}
 	}
 
 	~Provider() = default;
 
 private:
 	int day_;
+	std::vector<std::queue<Package>> item_queue_;
+	std::vector<Package> order_;
+	std::vector<int> volume_;
 };
 
 int main() {
