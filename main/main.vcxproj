@@ -158,7 +158,6 @@
     <ClCompile Include="Market.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Package.cpp" />
-    <ClCompile Include="PackageList.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Provider.cpp" />
     <ClCompile Include="Simple.cpp" />
@@ -178,7 +177,6 @@
     <ClInclude Include="Market.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Package.h" />
-    <ClInclude Include="PackageList.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Provider.h" />
     <ClInclude Include="Simple.h" />
