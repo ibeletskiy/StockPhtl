@@ -152,7 +152,7 @@ class Provider {
 
 	std::vector<Package> getDelivery() {
 		return order_;
-	}
+	} 
 
 	void getOrder(std::vector<Package>& order) {
 		for (int i = 0; i < order.size(); ++i) {
