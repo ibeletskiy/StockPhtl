@@ -140,7 +140,7 @@ class Provider {
 		for (int i = 0; i < item_queue_.size(); ++i) {
 			int date;
 			if (!item_queue_[i].empty()) {
-				date = day_ + item_queue_[i].front().getDuration() / 2;
+				date = day_ + item_queue_[i].front().getDuration();
 			}
 			while (!item_queue_[i].empty() && item_queue_[i].front().getLastDay() == day_) {
 				order_.push_back(item_queue_[i].front());
