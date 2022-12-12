@@ -7,10 +7,6 @@ public:
 		name_(name_), number_(number_), price_(price_), actual_(price_), discount_(discount_), wholesale_(wholesale_),
 		duration_(duration_), interest_(interest_), is_discount_(0) {}
 
-	Item(const Item& other) {
-		*this = other;
-	}
-
 	int getActual() const {
 		return actual_;
 	}
