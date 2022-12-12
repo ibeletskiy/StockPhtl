@@ -49,10 +49,10 @@ public:
 
 	std::vector<int> GetOrderList(std::vector<std::pair<Package, int>>& prices) {
 		std::vector <int> order;
-		for (auto package : prices) {
+		for (auto& package : prices) {
 			int number = package.first.number;
 			if (package.first.price == package.second) {
-				order.push_back(max(0, max_count[number] * 0.8 - shelf[number].count));
+				order.push_back(std::max(0.0, max_count[number] * 0.8 - shelf[number].count));
 			}
 			else {
 				order.push_back(max_count[number] - shelf[number].count);
@@ -63,7 +63,7 @@ public:
 
 	void PerformDay() {
 		for (Package& package : shelf) {
-			package.count = max(0, package.count - customer_count * package.interest);
+			package.count = std::max(0.0, package.count - customer_count * package.interest);
 		}
 	}
 
