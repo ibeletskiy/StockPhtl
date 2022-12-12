@@ -5,8 +5,6 @@
 #include <queue>
 #include <SFML/Graphics.hpp>
 
-//sfml govno
-
 class Item {
 public:
 	Item(std::string name_, int number_, int price_, int discount_, int wholesale_, int duration_, double interest_):
@@ -27,6 +25,10 @@ public:
 
 	void setDiscount() {
 		actual_ = discount_;
+	}
+
+	void setLastDay(int value) {
+		last_day_ = value;
 	}
 
 	double getInterest() const {
@@ -133,13 +135,16 @@ class Provider {
 	}
 
 	void performDay() { // создать getLastDay()
+		order_.clear();
 		++day_;
 		for (int i = 0; i < item_queue_.size(); ++i) {
 			int date;
-			if (!item_queue_)
+			if (!item_queue_[i].empty()) {
+				date = day_ + item_queue_[i].front().getDuration() / 2;
+			}
 			while (!item_queue_[i].empty() && item_queue_[i].front().getLastDay() == day_) {
 				order_.push_back(item_queue_[i].front());
-				order_.back().getLastDay();
+				order_.back().setLastDay(date);
 				item_queue_[i].pop();
 			}
 		}
