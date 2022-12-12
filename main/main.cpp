@@ -128,7 +128,14 @@ class Provider {
 
 	void getOrder(std::vector<Package>& order) {
 		for (int i = 0; i < order.size(); ++i) {
+			if (order[i].getCount() == 0) continue;
+			int date = day_;
+			if (item_queue_[i].empty()) {
+				date += 2;
+			}
+			else {
 
+			}
 		}
 	}
 
