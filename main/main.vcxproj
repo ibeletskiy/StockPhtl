@@ -148,10 +148,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Case.cpp" />
     <ClCompile Include="Column.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Drawer.cpp" />
+    <ClCompile Include="Inputfield.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -168,10 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Case.h" />
     <ClInclude Include="Column.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Drawer.h" />
+    <ClInclude Include="Inputfield.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Market.h" />

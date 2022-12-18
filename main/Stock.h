@@ -45,6 +45,28 @@ public:
 		}
 	}
 
+	void writeOff() {
+		for (auto& v : case_) {
+			while (!v.empty() && v[0].getLastDay() < day_) {
+				// возможно положить посчитать количество мусора
+				v.pop_front();
+			}
+		}
+	}
+
+	void sendDelivery() {
+		for (int i = 0; i < markets_.size(); ++i) {
+			std::vector<Package> to_send;
+			for (int j = 0; j < orders_.size(); ++j) {
+				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[j]) {
+					//прибавить к прибыли
+					to_send.push_back(case_[j][0]);
+					case_[j].pop_front();
+				}
+			}
+			markets_[i]->getProducts(to_send);
+		}
+	}
 
 private:
 	int balance_;
