@@ -7,10 +7,6 @@
 
 class Stock {
 public:
-	void writeOff() {
-		
-	}
-
 	Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count, Provider* provider,
 		Manager* manager):
 		balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count), provider_(provider), manager_(manager) {
@@ -58,7 +54,7 @@ public:
 		for (int i = 0; i < markets_.size(); ++i) {
 			std::vector<Package> to_send;
 			for (int j = 0; j < orders_.size(); ++j) {
-				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[j]) {
+				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) {
 					//прибавить к прибыли
 					to_send.push_back(case_[j][0]);
 					case_[j].pop_front();
@@ -73,7 +69,7 @@ private:
 	int day_;
 	std::vector <Market*> markets_;
 	std::vector <std::vector<int>> orders_;
-	std::vector <std::deque <Package>> case_;
+	std::vector <std::deque<Package>> case_;
 	std::vector <Package> items_;
 	std::vector <int> max_count_;
 	Provider* provider_;
