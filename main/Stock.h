@@ -9,6 +9,12 @@ public:
 		balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count) {}
 
 	void writeOff() {
+		for (auto& v : case_) {
+			while (!v.empty() && v[0].getLastDay() < day_) {
+				// возможно положить посчитать количество мусора
+				v.pop_front();
+			}
+		}
 	}
 
 private:
