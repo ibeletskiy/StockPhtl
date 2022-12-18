@@ -7,6 +7,7 @@
 
 class Stock {
 public:
+
 	Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count, Provider* provider,
 		Manager* manager):
 		balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count), provider_(provider), manager_(manager) {
@@ -25,11 +26,11 @@ public:
 	}
 
 	void makeOrder() {
-
+		manager_->makeOrder();
 	}
 
 	void makePrices() {
-
+		manager_->makePrices(items_);
 	}
 
 	void getOrder() {
@@ -62,6 +63,10 @@ public:
 			}
 			markets_[i]->getProducts(to_send);
 		}
+	}
+
+	void setManager(Manager* manager) {
+		manager_ = manager;
 	}
 
 private:
