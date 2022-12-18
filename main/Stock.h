@@ -13,7 +13,7 @@ private:
 	int day_;
 	std::vector <Market*> markets_;
 	std::vector <std::vector<Package>> orders_;
-	std::vector <std::vector<Package>> case_;
+	std::vector <std::deque <Package>> case_;
 	std::vector <Package> items_;
 	std::vector <int> max_count_;
 };
