@@ -4,6 +4,10 @@
 
 class Stock {
 public:
+	void writeOff() {
+		
+	}
+
 	
 
 private:
@@ -11,5 +15,5 @@ private:
 	std::vector <Market*> markets_;
 	std::vector <std::vector<Package>> orders_;
 	std::vector <std::deque<Package>> case_;
-
+	int day_;
 };
