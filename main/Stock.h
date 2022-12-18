@@ -20,9 +20,13 @@ public:
 	void sendDelivery() {
 		for (int i = 0; i < markets_.size(); ++i) {
 			std::vector<Package> to_send;
-			for (Package now : orders_[i]) {
-				
+			for (int j = 0; j < orders_.size(); ++j) {
+				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[j]) {
+					to_send.push_back(case_[j][0]);
+					case_[j].pop_front();
+				}
 			}
+			markets_[i]->getProducts(to_send);
 		}
 	}
 
@@ -31,7 +35,7 @@ private:
 	int day_;
 	std::vector <Market*> markets_;
 	std::vector <std::vector<Package>> orders_;
-	std::vector <std::deque <Package>> case_;
+	std::vector <std::deque<Package>> case_;
 	std::vector <Package> items_;
 	std::vector <int> max_count_;
 };
