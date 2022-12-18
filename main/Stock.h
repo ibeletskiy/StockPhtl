@@ -22,6 +22,7 @@ public:
 			std::vector<Package> to_send;
 			for (int j = 0; j < orders_.size(); ++j) {
 				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[j]) {
+					//прибавить к прибыли
 					to_send.push_back(case_[j][0]);
 					case_[j].pop_front();
 				}
