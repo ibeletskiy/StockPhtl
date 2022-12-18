@@ -1,5 +1,6 @@
 #pragma once
 #include "Market.h"
+#include <deque>
 
 class Stock {
 public:
