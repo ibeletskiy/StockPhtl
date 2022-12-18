@@ -4,11 +4,9 @@
 
 class Stock {
 public:
-	void writeOff() {
-		
-	}
 
-	
+	void writeOff() {
+	}
 
 private:
 	int balance_;
