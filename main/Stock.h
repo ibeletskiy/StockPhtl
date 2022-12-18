@@ -26,11 +26,11 @@ public:
 	}
 
 	void makeOrder() {
-
+		manager_->makeOrder();
 	}
 
 	void makePrices() {
-
+		manager_->makePrices(items_);
 	}
 
 	void getOrder() {
@@ -63,6 +63,10 @@ public:
 			}
 			markets_[i]->getProducts(to_send);
 		}
+	}
+
+	void setManager(Manager* manager) {
+		manager_ = manager;
 	}
 
 private:
