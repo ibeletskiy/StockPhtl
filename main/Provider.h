@@ -10,6 +10,7 @@
 std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 class Provider {
+public:
 	Provider(std::vector<Package>& basic_shelf) {
 		for (auto package : basic_shelf) {
 			volume_.push_back(package.getCount());
@@ -33,7 +34,7 @@ class Provider {
 		}
 	}
 
-	std::vector<Package> getDelivery() {
+	std::vector<Package> sendDelivery() {
 		return order_;
 	}
 
