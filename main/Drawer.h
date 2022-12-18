@@ -2,5 +2,5 @@
 #include <SFML/Graphics.hpp>
 
 class Drawer {
-
+	
 };
