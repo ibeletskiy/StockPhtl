@@ -17,6 +17,15 @@ public:
 		}
 	}
 
+	void sendDelivery() {
+		for (int i = 0; i < markets_.size(); ++i) {
+			std::vector<Package> to_send;
+			for (Package now : orders_[i]) {
+				
+			}
+		}
+	}
+
 private:
 	int balance_;
 	int day_;
