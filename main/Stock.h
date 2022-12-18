@@ -4,6 +4,12 @@
 
 class Stock {
 public:
+	void writeOff() {
+		
+	}
+
+	
+
 	Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count):
 		balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count) {}
 
