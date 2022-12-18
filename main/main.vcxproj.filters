@@ -24,9 +24,6 @@
     <ClCompile Include="Package.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Case.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Stock.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Package.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Case.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Stock.h">

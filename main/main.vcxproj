@@ -148,7 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Case.cpp" />
     <ClCompile Include="Column.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Drawer.cpp" />
@@ -169,7 +168,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Case.h" />
     <ClInclude Include="Column.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Drawer.h" />
