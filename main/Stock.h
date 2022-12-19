@@ -60,8 +60,8 @@ public:
 		for (int i = 0; i < markets_.size(); ++i) {
 			std::vector<Package> to_send;
 			for (int j = 0; j < orders_.size(); ++j) {
-				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) { 
-					//прибавить к прибыли
+				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) {
+					balance_ += case_[j][0].getActual();
 					to_send.push_back(case_[j][0]);
 					case_[j].pop_front();
 				}
