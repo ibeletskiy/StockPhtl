@@ -26,7 +26,12 @@ public:
 	}
 
 	void makeOrder() {
-		manager_->makeOrder();
+		std::vector <Package> order;
+		for (int i = 0; i < items_.size(); ++i) {
+			order[i].setCount(max_count_[i] - case_[i].size());
+		}
+		manager_->makeOrder(order);
+		provider_->getOrder(order);
 	}
 
 	void makePrices() {
@@ -37,7 +42,7 @@ public:
 		for (int i = 0; i < markets_.size(); ++i) {
 			std::vector <int> order = markets_[i]->getOrderList(items_);
 			for (int j = 0; j < order.size(); ++j) {
-				orders_[i][j] += order[j];
+				orders_[i][j] += order[j]; 
 			}
 		}
 	}
@@ -55,7 +60,7 @@ public:
 		for (int i = 0; i < markets_.size(); ++i) {
 			std::vector<Package> to_send;
 			for (int j = 0; j < orders_.size(); ++j) {
-				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) {
+				while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) { 
 					//прибавить к прибыли
 					to_send.push_back(case_[j][0]);
 					case_[j].pop_front();
@@ -68,6 +73,9 @@ public:
 	void setManager(Manager* manager) {
 		manager_ = manager;
 	}
+
+	friend void Smart::makeOrder(std::vector <Package>& items);
+	friend void Smart::makePrices(std::vector <Package>& items);
 
 private:
 	int balance_;

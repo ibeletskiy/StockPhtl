@@ -19,6 +19,10 @@ public:
 		actual_ = discount_;
 	}
 
+	void deleteDiscount() {
+		actual_ = price_;
+	}
+
 	void setLastDay(int value) {
 		last_day_ = value;
 	}

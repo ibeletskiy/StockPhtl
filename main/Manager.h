@@ -6,8 +6,8 @@ class Stock;
 class Manager {
 public:
 	virtual void makePrices(std::vector <Package>& items) = 0;
-	virtual void makeOrder() = 0;
-private:
-	Stock* stock;
+	virtual void makeOrder(std::vector <Package>& order) = 0;
+protected:
+	Stock* stock_;
 };
 
