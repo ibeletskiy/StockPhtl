@@ -4,6 +4,7 @@
 #include "Manager.h"
 #include <deque>
 #include <algorithm>
+#include "Smart.h"
 
 class Stock {
 public:
