@@ -187,6 +187,9 @@
     <ClInclude Include="Trashcan.h" />
     <ClInclude Include="Vertical.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="framd.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

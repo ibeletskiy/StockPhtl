@@ -129,4 +129,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="framd.ttf">
+      <Filter>Файлы ресурсов</Filter>
+    </Font>
+  </ItemGroup>
 </Project>
