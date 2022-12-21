@@ -151,6 +151,7 @@
     <ClCompile Include="Column.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Drawer.cpp" />
+    <ClCompile Include="Horizontal.cpp" />
     <ClCompile Include="Inputfield.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,12 +166,14 @@
     <ClCompile Include="Statistic.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="Trashcan.cpp" />
+    <ClCompile Include="Vertical.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Column.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Drawer.h" />
+    <ClInclude Include="Horizontal.h" />
     <ClInclude Include="Inputfield.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Manager.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="Statistic.h" />
     <ClInclude Include="Stock.h" />
     <ClInclude Include="Trashcan.h" />
+    <ClInclude Include="Vertical.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
