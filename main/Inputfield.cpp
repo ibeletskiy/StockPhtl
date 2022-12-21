@@ -1,7 +1,7 @@
 #include "Inputfield.h"
 
-InputField::InputField(Vector2f size, Vector2f position, Color color, float border = 0, Color text_color = Color::Black,
-	std::wstring name = L"", int size_ch = 0, Color title_color = Color::Black) :
+InputField::InputField(Vector2f size, Vector2f position, Color color, float border, Color text_color,
+	std::wstring name, int size_ch, Color title_color) :
 	Button(size, position, color, border, name, size_ch, text_color) {
 	text_.setPosition({ position.x + 5, position.y + 2 });
 	text_.setCharacterSize(size.y - 10);
@@ -12,7 +12,7 @@ void InputField::setOnlyNumbers(bool type) {
 	only_numbers_ = type;
 }
 
-void InputField::setTitle(std::wstring name, int size, Color color = { 0, 0, 0, 255 }) {
+void InputField::setTitle(std::wstring name, int size, Color color) {
 	Button::setTitle(name, size, color);
 }
 
@@ -28,7 +28,7 @@ void InputField::setTextPosition(Vector2f pos) {
 	text_.setPosition(pos);
 }
 
-void InputField::setButtonSettings(Vector2f size, int outline_size, Color fill, Color outline = { 0, 0, 0, 255 }) {
+void InputField::setButtonSettings(Vector2f size, int outline_size, Color fill, Color outline) {
 	Button::setButtonSize(size, outline_size);
 	Button::setButtonColor(fill, outline);
 }

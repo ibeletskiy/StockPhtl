@@ -13,13 +13,13 @@ public:
 		pointer_ = 0;
 		for (int i = 0; i < count; ++i) {
 			stats_[i].setSize((double)size_.y / stats_.size());
-			stats_[i].setPosition({ position_.x + ((double)size_.y / stats_.size()) * i, position_.y });
+			stats_[i].setPosition(Vector2f(position_.x + ((double)size_.y / stats_.size()) * i, position_.y));
 		}
 		zero_.setString("0");
 		zero_.setCharacterSize(20);
-		zero_.setPosition({ position.x - 20, position.y + size.y - 10 });
+		zero_.setPosition(Vector2f(position.x - 20, position.y + size.y - 10 ));
 		max_text_.setCharacterSize(20);
-		max_text_.setPosition({ position.x - 20, position.y + 10 });
+		max_text_.setPosition(Vector2f(position.x - 20, position.y + 10 ));
 	}
 	
 	void addValue(int value) {
@@ -36,7 +36,7 @@ public:
 			stats_.push_back(Vertical({ 0, 0 }, position_, value));
 			for (int i = 0; i < stats_.size(); ++i) {
 				stats_[i].setSize((double)size_.y / stats_.size());
-				stats_[i].setPosition({ position_.x + ((double)size_.y / stats_.size()) * i, position_.y });
+				stats_[i].setPosition(Vector2f(position_.x + ((double)size_.y / stats_.size()) * i, position_.y));
 			}
 		}
 	}

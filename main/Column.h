@@ -17,16 +17,16 @@ public:
 	}
 
 	virtual void setPosition(Vector2f pos) = 0;
-	virtual void setValue(double val) = 0;
-	virtual void setSize(double size) = 0;
+	virtual void setValue(float val) = 0;
+	virtual void setSize(float size) = 0;
 
 	void draw(RenderWindow& window, Vector2i mouse) {
 		window.draw(shape_);
 		if (contains(mouse)) {
 			panel_.setPosition({ mouse.x - panel_.getSize().x, mouse.y - panel_.getSize().y});
 			text_.setString(std::to_string(value_));
-			text_.setPosition({ panel_.getPosition().x +
-				(double)(panel_.getSize().x - text_.getGlobalBounds().height) / 2, 2 });
+			text_.setPosition(Vector2f(panel_.getPosition().x +
+				(double)(panel_.getSize().x - text_.getGlobalBounds().height) / 2, 2 ));
 			window.draw(panel_);
 			text_.setFont(font);
 			window.draw(text_);
