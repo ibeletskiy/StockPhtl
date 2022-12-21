@@ -150,7 +150,6 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Column.cpp" />
     <ClCompile Include="Data.cpp" />
-    <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Horizontal.cpp" />
     <ClCompile Include="Inputfield.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -172,7 +171,6 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Column.h" />
     <ClInclude Include="Data.h" />
-    <ClInclude Include="Drawer.h" />
     <ClInclude Include="Horizontal.h" />
     <ClInclude Include="Inputfield.h" />
     <ClInclude Include="Item.h" />

@@ -54,9 +54,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Drawer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Statistic.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Statistic.h">
