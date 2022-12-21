@@ -3,6 +3,7 @@
 
 class Vertical : public Column {
 public :
+	Vertical() = default;
 	Vertical(Vector2f size, Vector2f pos, int value = 0) : Column(size, pos, value) {}
 	virtual void setPosition(Vector2f pos) override {
 		shape_.setPosition({pos.x, pos.y - shape_.getSize().y});

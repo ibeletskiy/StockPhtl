@@ -3,6 +3,7 @@
 
 class Horizontal : public Column {
 public:
+	Horizontal() = default;
 	Horizontal(Vector2f size, Vector2f pos, int value = 0) : Column(size, pos, value) {}
 	virtual void setPosition(Vector2f pos) override {
 		shape_.setPosition(pos);

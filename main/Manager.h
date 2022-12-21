@@ -1,5 +1,6 @@
 #pragma once
 #include "Package.h"
+#include <vector>
 
 class Stock;
 
