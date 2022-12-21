@@ -9,35 +9,41 @@ class Statistic {
 public:
 	Statistic() = default;
 	Statistic(Vector2f size, Vector2f position, int count = 0) : size_(size), position_(position) {
-		stats_.resize(count);
+		stats_.resize(count, Vertical({ 0, 0 }, { 0, 0 }, 0));
 		pointer_ = 0;
 		for (int i = 0; i < count; ++i) {
-			stats_[i].setSize((double)size_.y / stats_.size());
-			stats_[i].setPosition(Vector2f(position_.x + ((double)size_.y / stats_.size()) * i, position_.y));
+			stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
+			stats_[i].setSize((double)size_.x / stats_.size());
 		}
+		zero_.setFillColor(Color::Black);
 		zero_.setString("0");
 		zero_.setCharacterSize(20);
-		zero_.setPosition(Vector2f(position.x - 20, position.y + size.y - 10 ));
+		zero_.setPosition(Vector2f(position.x - 30, position.y + size.y - 20 ));
+		max_text_.setFillColor(Color::Black);
 		max_text_.setCharacterSize(20);
-		max_text_.setPosition(Vector2f(position.x - 20, position.y + 10 ));
+		max_text_.setPosition(Vector2f(position.x - 30, position.y ));
 	}
 	
 	void addValue(int value) {
 		if (value > max_) {
 			max_ = value;
 			max_text_.setString(std::to_string(max_));
+			max_text_.setFont(font);
+			int value = max_text_.getLocalBounds().width;
+			max_text_.setPosition(Vector2f(position_.x - max_text_.getGlobalBounds().width - 10, position_.y));
 			for (int i = 0; i < stats_.size(); ++i) {
-				stats_[i].setValue(((double)stats_[i].getValue() / max_) * size_.y);
+				stats_[i].setValue(((double)stats_[i].getValue() / max_) * size_.y, stats_[i].getValue());
 			}
 		}
 		if (pointer_ != stats_.size()) {
-			stats_[pointer_++].setValue(((double)value / max_) * size_.y);
+			stats_[pointer_++].setValue(((double)value / max_) * size_.y, value);
 		} else {
-			stats_.push_back(Vertical({ 0, 0 }, position_, value));
+			stats_.push_back(Vertical(Vector2f(0, ((double)value / max_) * size_.y), position_, value));
 			for (int i = 0; i < stats_.size(); ++i) {
-				stats_[i].setSize((double)size_.y / stats_.size());
-				stats_[i].setPosition(Vector2f(position_.x + ((double)size_.y / stats_.size()) * i, position_.y));
+				stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
+				stats_[i].setSize((double)size_.x / stats_.size());
 			}
+			++pointer_;
 		}
 	}
 

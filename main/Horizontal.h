@@ -9,12 +9,12 @@ public:
 		shape_.setPosition(pos);
 	}
 
-	virtual void setValue(float val) override {
+	virtual void setValue(float val, int real) override {
 		shape_.setSize(Vector2f(val, shape_.getSize().y));
 	}
 
 	virtual void setSize(float size) override {
-		shape_.setSize(Vector2f(0, size));
+		shape_.setSize(Vector2f(shape_.getSize().x, size));
 	}
 };
 

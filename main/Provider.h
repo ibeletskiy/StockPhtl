@@ -7,7 +7,7 @@
 #include <chrono>
 #include <queue>
 
-std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
+static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 class Provider {
 public:
