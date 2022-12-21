@@ -41,10 +41,14 @@ public:
 	}
 
 	bool contains(Vector2i mouse) {
-		return (mouse.x >= shape_.getPosition().x &&
+		return ((mouse.x >= shape_.getPosition().x &&
 			mouse.x <= (shape_.getPosition().x + shape_.getSize().x) &&
 			mouse.y >= shape_.getPosition().y &&
-			mouse.y <= (shape_.getPosition().y + shape_.getSize().y));
+			mouse.y <= (shape_.getPosition().y + shape_.getSize().y))) || 
+			((mouse.x >= shape_.getPosition().x &&
+				mouse.x <= (shape_.getPosition().x + shape_.getSize().x) &&
+				mouse.y <= shape_.getPosition().y &&
+				mouse.y >= (shape_.getPosition().y + shape_.getSize().y)));
 	}
 protected:
 	int value_;

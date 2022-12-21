@@ -25,8 +25,8 @@ public:
 	}
 	
 	void addValue(int value) {
-		if (value > max_) {
-			max_ = value;
+		if (std::abs(value) > max_) {
+			max_ = std::abs(value);
 			max_text_.setString(std::to_string(max_));
 			max_text_.setFont(font);
 			int value = max_text_.getLocalBounds().width;
