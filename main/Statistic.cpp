@@ -1,5 +1,7 @@
 #include "Statistic.h"
 
+extern Font font;
+
 Statistic::Statistic(Vector2f size, Vector2f position, int count) : size_(size), position_(position) {
 	stats_.resize(count, Column({ 0, 0 }, { 0, 0 }, 0));
 	pointer_ = 0;

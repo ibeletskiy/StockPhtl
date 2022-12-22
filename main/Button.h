@@ -3,8 +3,6 @@
 
 using namespace sf;
 
-Font font; // это нужно здесь, чтобы влиять на все остальные проекты связанные с кнопкой
-
 class Button {
 public:
 	Button() = default;

@@ -1,5 +1,7 @@
 #include "Column.h"
 
+extern Font font;
+
 Column::Column(Vector2f size, Vector2f pos, int value, Color c, Vector2f panel_size) : value_(value) {
 	shape_.setSize(size);
 	shape_.setSize(size);

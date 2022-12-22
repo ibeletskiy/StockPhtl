@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-extern Font font;
+Font font;
 
 int main() {
 	font.loadFromFile("framd.ttf");

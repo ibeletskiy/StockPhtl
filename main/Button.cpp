@@ -1,5 +1,7 @@
 #include "Button.h"
 
+extern Font font;
+
 Button::Button(Vector2f size, Vector2f position, Color color, float border, std::wstring name, int size_ch, Color title_color) {
 	field_.setSize(size);
 	field_.setPosition(position);
