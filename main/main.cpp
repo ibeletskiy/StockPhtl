@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Statistic.h"
 #include "Button.h"
+#include "Scrollbar.h"
 
 using namespace sf;
 
@@ -9,6 +10,9 @@ Font font;
 
 int main() {
 	font.loadFromFile("framd.ttf");
+	ScrollBar b(12, 300, { 100, 500 });
+	b.setLineColor(Color::Black);
+	b.setCircleColor(Color::Green);
 	Statistic s({ 800, 200 }, { 50, 50 }, 30);
 	s.addValue(10);
 	s.addValue(5);
@@ -28,8 +32,11 @@ int main() {
 		Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == Event::Closed) window.close();
+			b.changeCircle(mouse, event);
 		}
 		s.draw(window, mouse);
+		b.draw(window);
 		window.display();
 	}
+
 }
