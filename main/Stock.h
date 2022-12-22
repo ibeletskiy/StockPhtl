@@ -17,12 +17,14 @@ public:
 		for (auto& vec : orders_) {
 			vec.resize(items_.size(), 0);
 		}
+		ordered_.resize(items_.size(), 0);
 	}
 
 	void getDelivery() {
 		std::vector <Package> order = provider_->sendDelivery();
 		for (Package package : order) {
 			case_[package.getNumber()].push_back(package);
+			ordered_[package.getNumber()]--;
 		}
 	}
 
@@ -33,6 +35,9 @@ public:
 		}
 		manager_->makeOrder(order);
 		provider_->getOrder(order);
+		for (int i = 0; i < items_.size(); ++i) {
+			ordered_[i] += order[i].getCount();
+		}
 	}
 
 	void makePrices() {
@@ -85,6 +90,7 @@ private:
 	std::vector <std::vector<int>> orders_;
 	std::vector <std::deque<Package>> case_;
 	std::vector <Package> items_;
+	std::vector <int> ordered_;
 	std::vector <int> max_count_;
 	Provider* provider_;
 	Manager* manager_;
