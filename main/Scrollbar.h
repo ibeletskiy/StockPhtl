@@ -5,6 +5,7 @@ using namespace sf;
 
 class ScrollBar {
 public:
+	ScrollBar() = default;
 	ScrollBar(int r, int length, Vector2f position, bool part_view = 0);
 
 	void setLinePosition(Vector2f position);

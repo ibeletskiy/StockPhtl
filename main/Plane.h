@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Stock.h"
 #include "Statistic.h"
+#include "Scrollbar.h"
 #include "Inputfield.h"
 #include <vector>
 
@@ -12,7 +13,7 @@ class Plane {
 public:
 
 	void getStart() {
-		RenderWindow window(VideoMode(1000, 800), "get started", Style::Close | Style::Titlebar);
+		RenderWindow window(VideoMode(1400, 1000), "get started", Style::Close | Style::Titlebar);
 		InputField days_field({ 1, 1 }, { 1, 1 }, Color::White);
 		days_field.setOnlyNumbers(true);
 		InputField types_field({ 1, 1 }, { 1, 1 }, Color::White);
@@ -20,7 +21,7 @@ public:
 		InputField markets_field({ 1, 1 }, { 1, 1 }, Color::White);
 		markets_field.setOnlyNumbers(true);
 		while (window.isOpen()) {
-			window.clear(Color::White);
+			window.clear(back_color_);
 			Event event;
 			Vector2i mouse_position = Mouse::getPosition(window);
 			while (window.pollEvent(event)) {
@@ -55,23 +56,32 @@ public:
 		red_ = Color(182, 13, 58, 255);
 		grey_ = Color(204, 204, 204, 255);
 		edges_.resize(4);
-		edges_[0] = RectangleShape();
-		edges_[1] = RectangleShape();
-		edges_[2] = RectangleShape();
-		edges_[3] = RectangleShape();
+		edges_[0] = RectangleShape({ 1400, 400 });
+		edges_[0].setPosition({0, 0});
+		edges_[0].setFillColor(back_color_);
+		edges_[1] = RectangleShape({ 60, 565 });
+		edges_[1].setPosition({ 0, 400 });
+		edges_[1].setFillColor(back_color_);
+		edges_[2] = RectangleShape({600, 565 });
+		edges_[2].setPosition({800, 400});
+		edges_[2].setFillColor(back_color_);
+		edges_[3] = RectangleShape({1400, 35});
+		edges_[3].setPosition({0, 965});
+		edges_[3].setFillColor(back_color_);
 		stats_ = Statistic();
 		manager_choose_ = Button();
 		types_choose_ = Button();
-		days_ = 0;
+		bar_ = ScrollBar();
+		days_ = 1;
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
 		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
-		/*shelves_.resize(stock_->getCaseSize());
+		shelves_.resize(6);
 		for (int i = 0; i < shelves_.size(); ++i) {
-
+			shelves_[i] = Button({ 740, 79 }, Vector2f(60, 400 + 81 * i), green_);
 		}
-		market_buttons_.resize(markets_cnt_);
+		/*market_buttons_.resize(markets_cnt_);
 		for (int i = 0; i < market_buttons_.size(); ++i) {
 
 		}*/
@@ -79,10 +89,10 @@ public:
 	}
 
 	void play() {
-		RenderWindow window(VideoMode(1000, 800), "simulation", Style::Close | Style::Titlebar);
+		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
 			while (window.isOpen()) {
-				window.clear(back_color_);
+				window.clear(Color::White);
 				Event event;
 				Vector2i mouse_position = Mouse::getPosition(window);
 				while (window.pollEvent(event)) {
@@ -97,6 +107,7 @@ public:
 					window.draw(now);
 				}
 				manager_choose_.draw(window);
+				bar_.draw(window);
 				types_choose_.draw(window);
 				stats_.draw(window, mouse_position);
 				for (auto& now : market_buttons_) {
@@ -133,6 +144,7 @@ private:
 	Statistic stats_;
 	std::vector<Button> shelves_;
 	std::vector<Button> market_buttons_;
+	ScrollBar bar_;
 
 	int days_, types_, markets_cnt_;
 	Provider* provider_;
