@@ -93,6 +93,18 @@ public:
 
 	}
 
+	void performDay() {
+		stock_->sendDelivery();
+		provider_->performDay();
+		stock_->getDelivery();
+		stock_->makePrices();
+		stock_->getOrder();
+		stock_->makeOrder();
+		for (Market* market : markets_) {
+			market->performDay();
+		}
+	}
+
 	void play() {
 		RenderWindow window(VideoMode(1000, 800), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
