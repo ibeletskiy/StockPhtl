@@ -19,9 +19,19 @@ public:
 		text_.setCharacterSize(panel_size.y - 4);
 	}
 
-	virtual void setPosition(Vector2f pos) = 0;
-	virtual void setValue(float val, int real) = 0;
-	virtual void setSize(float size) = 0;
+	void setPosition(Vector2f pos) {
+		shape_.setPosition(Vector2f(pos.x, pos.y - shape_.getSize().y));
+	}
+
+	void setValue(float val, int real) {
+		shape_.setPosition(Vector2f(shape_.getPosition().x, shape_.getPosition().y + shape_.getSize().y - val));
+		shape_.setSize(Vector2f(shape_.getSize().x, val));
+		value_ = real;
+	}
+
+	void setSize(float size) {
+		shape_.setSize(Vector2f(size, shape_.getSize().y));
+	}
 
 	void draw(RenderWindow& window, Vector2i mouse) {
 		window.draw(shape_);

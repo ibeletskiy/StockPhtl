@@ -2,14 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
-#include "Vertical.h"
+#include "Column.h"
 #include "Button.h"
 
 class Statistic {
 public:
 	Statistic() = default;
 	Statistic(Vector2f size, Vector2f position, int count = 0) : size_(size), position_(position) {
-		stats_.resize(count, Vertical({ 0, 0 }, { 0, 0 }, 0));
+		stats_.resize(count, Column({ 0, 0 }, { 0, 0 }, 0));
 		pointer_ = 0;
 		for (int i = 0; i < count; ++i) {
 			stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
@@ -38,7 +38,7 @@ public:
 		if (pointer_ != stats_.size()) {
 			stats_[pointer_++].setValue(((double)value / max_) * size_.y, value);
 		} else {
-			stats_.push_back(Vertical(Vector2f(0, ((double)value / max_) * size_.y), position_, value));
+			stats_.push_back(Column(Vector2f(0, ((double)value / max_) * size_.y), position_, value));
 			for (int i = 0; i < stats_.size(); ++i) {
 				stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
 				stats_[i].setSize((double)size_.x / stats_.size());
@@ -58,7 +58,7 @@ public:
 	}
 
 private:
-	std::vector<Vertical> stats_;
+	std::vector<Column> stats_;
 	Vector2f size_, position_;
 	Text zero_, max_text_;
 	int max_;
