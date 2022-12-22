@@ -18,6 +18,7 @@ public:
 	void setButtonSettings(Vector2f size, int outline_size, Color fill, Color outline = { 0, 0, 0, 255 });
 	void setTextSettings(int size, Color color);
 	bool isChosen();
+	std::wstring getValue();
 	void change(Event& now, Vector2i mouse);
 	void draw(RenderWindow& window);
 

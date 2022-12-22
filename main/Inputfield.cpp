@@ -38,6 +38,10 @@ void InputField::setTextSettings(int size, Color color) {
 	text_.setFillColor(color);
 }
 
+std::wstring InputField::getValue() {
+	return text_.getString();
+}
+
 bool InputField::isChosen() {
 	return chosen_;
 }

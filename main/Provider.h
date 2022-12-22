@@ -8,6 +8,7 @@
 
 class Provider {
 public:
+	Provider() = default;
 	Provider(std::vector<Package>& basic_shelf);
 
 	void performDay();
