@@ -1,4 +1,8 @@
 #include "Provider.h"
+#include <random>
+#include <chrono>
+
+static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 Provider::Provider(std::vector<Package>& basic_shelf) {
 	for (auto package : basic_shelf) {
@@ -32,10 +36,10 @@ void Provider::getOrder(std::vector<Package>& order) {
 		if (order[i].getCount() == 0) continue;
 		int date = day_;
 		if (item_queue_[i].empty()) {
-			date += 1;
+			date += 1 + rnd() % 4;
 		}
 		else {
-			date = item_queue_[i].back().getLastDay() + 1;
+			date = item_queue_[i].back().getLastDay() + rnd() % 3;
 		}
 		Package package = order[i];
 		package.setCount(volume_[i]);

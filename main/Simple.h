@@ -9,5 +9,5 @@ public:
 			package.deleteDiscount();
 		}
 	}
-	virtual void makeOrder(std::vector <Package>& order) override {}
+	virtual void makeOrder(std::vector <Package>& order) override;
 };
