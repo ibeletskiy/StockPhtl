@@ -4,6 +4,8 @@
 
 using namespace sf;
 
+extern Font font;
+
 class InputField : Button {
 public:
 	InputField(Vector2f size, Vector2f position, Color color, float border = 0, Color text_color = Color::Black,

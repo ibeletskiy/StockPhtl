@@ -1,9 +1,11 @@
 ﻿#include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Button.h"
 #include "Statistic.h"
+#include "Button.h"
 
 using namespace sf;
+
+extern Font font;
 
 int main() {
 	font.loadFromFile("framd.ttf");
