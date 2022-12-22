@@ -10,7 +10,7 @@ int main() {
 	Statistic s({ 800, 200 }, { 50, 50 }, 30);
 	s.addValue(10);
 	s.addValue(5);
-	s.addValue(15);
+	s.addValue(10);
 	s.addValue(5);
 	s.addValue(4);
 	s.addValue(5);
@@ -18,7 +18,7 @@ int main() {
 	s.addValue(9);
 	s.addValue(11);
 	s.addValue(5);
-	s.addValue(-10);
+	s.addValue(15);
 	RenderWindow window(VideoMode(1000, 1000), "stock", Style::Close | Style::Titlebar);
 	while (window.isOpen()) {
 		window.clear(Color::White);
