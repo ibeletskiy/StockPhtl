@@ -42,9 +42,6 @@
     <ClCompile Include="Provider.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -60,10 +57,7 @@
     <ClCompile Include="Inputfield.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Vertical.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Horizontal.cpp">
+    <ClCompile Include="Scrollbar.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,9 +86,6 @@
     <ClInclude Include="Provider.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -110,10 +101,7 @@
     <ClInclude Include="Inputfield.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Vertical.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Horizontal.h">
+    <ClInclude Include="Scrollbar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

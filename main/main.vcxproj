@@ -150,39 +150,35 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Column.cpp" />
-    <ClCompile Include="Horizontal.cpp" />
     <ClCompile Include="Inputfield.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Market.cpp" />
-    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Provider.cpp" />
+    <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="Simple.cpp" />
     <ClCompile Include="Smart.cpp" />
     <ClCompile Include="Statistic.cpp" />
     <ClCompile Include="Stock.cpp" />
-    <ClCompile Include="Vertical.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Column.h" />
-    <ClInclude Include="Horizontal.h" />
     <ClInclude Include="Inputfield.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Market.h" />
-    <ClInclude Include="Model.h" />
     <ClInclude Include="Package.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Provider.h" />
+    <ClInclude Include="Scrollbar.h" />
     <ClInclude Include="Simple.h" />
     <ClInclude Include="Smart.h" />
     <ClInclude Include="Statistic.h" />
     <ClInclude Include="Stock.h" />
-    <ClInclude Include="Vertical.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="framd.ttf" />
