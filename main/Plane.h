@@ -48,7 +48,7 @@ public:
 			markets_cnt_ = std::min(9, std::stoi(markets_field.getValue()));
 		}
 	}
-	
+
 	Plane() {
 		back_color_ = Color();
 		green_ = Color();
@@ -60,6 +60,8 @@ public:
 		edges[2] = RectangleShape();
 		edges[3] = RectangleShape();
 		stats_ = Statistic();
+		manager_choose_ = Button();
+		types_choose_ = Button();
 		days_ = 0;
 		types_ = 0;
 		markets_cnt_ = 0;
@@ -67,12 +69,27 @@ public:
 		// где то тут должны быть инициализаци€ склада магазинов и поставщика, но пока что ее забыли
 		shelves_.resize(stock_->getCaseSize());
 		for (int i = 0; i < shelves_.size(); ++i) {
-			
+
+		}
+		market_buttons_.resize(markets_cnt_);
+		for (int i = 0; i < market_buttons_.size(); ++i) {
+
 		}
 
 	}
-	
-	void play();
+
+	void play() {
+		RenderWindow window(VideoMode(1000, 800), "simulation", Style::Close | Style::Titlebar);
+		while (window.isOpen()) {
+			Event event;
+			Vector2i mouse_position = Mouse::getPosition(window);
+			while (window.pollEvent(event)) {
+				if (event.type == Event::Closed) {
+					window.close();
+				}
+			}
+		}
+	}
 
 	void makePackages() {
 		packages_.emplace_back(Package(6, new Item("ћолоко", 0, 90, 60, 40, 7, 0.76)));
@@ -95,10 +112,10 @@ private:
 	// все что нужно заранее (строго в фронте)
 	Color back_color_, green_, red_, grey_;
 	std::vector<RectangleShape> edges;
+	Button manager_choose_, types_choose_;
 	Statistic stats_;
 	std::vector<Button> shelves_;
 	std::vector<Button> market_buttons_;
-	Button manager_choose_, types_choose_;
 
 	int days_, types_, markets_cnt_;
 	Provider* provider_;
