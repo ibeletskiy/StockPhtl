@@ -5,6 +5,7 @@
 #include <deque>
 #include <algorithm>
 #include "Smart.h"
+#include "Simple.h"
 
 class Stock {
 public:
@@ -26,6 +27,7 @@ public:
 	void setManager(Manager* manager);
 
 	friend void Smart::makeOrder(std::vector <Package>& items);
+	friend void Simple::makeOrder(std::vector <Package>& items);
 	friend void Smart::makePrices(std::vector <Package>& items);
 
 private:
