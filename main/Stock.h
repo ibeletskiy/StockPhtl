@@ -8,7 +8,7 @@
 
 class Stock {
 public:
-
+	Stock() = default;
 	Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count, Provider* provider, Manager* manager);
 
 	void getDelivery();

@@ -10,6 +10,7 @@ static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().cou
 
 class Provider {
 public:
+	Provider() = default;
 	Provider(std::vector<Package>& basic_shelf);
 
 	void performDay();
