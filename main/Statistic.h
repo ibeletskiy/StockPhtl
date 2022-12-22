@@ -3,7 +3,10 @@
 #include <vector>
 #include <string>
 #include "Column.h"
-#include "Button.h"
+
+using namespace sf;
+
+extern Font font;
 
 class Statistic {
 public:

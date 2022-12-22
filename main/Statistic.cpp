@@ -7,6 +7,7 @@ Statistic::Statistic(Vector2f size, Vector2f position, int count) : size_(size),
 		stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
 		stats_[i].setSize((double)size_.x / stats_.size());
 	}
+	max_ = 0;
 	zero_.setFillColor(Color::Black);
 	zero_.setString("0");
 	zero_.setCharacterSize(20);
