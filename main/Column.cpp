@@ -1,6 +1,6 @@
 #include "Column.h"
 
-Column::Column(Vector2f size, Vector2f pos, int value = 0, Color c = Color::Green, Vector2f panel_size) : value_(value) {
+Column::Column(Vector2f size, Vector2f pos, int value, Color c, Vector2f panel_size) : value_(value) {
 	shape_.setSize(size);
 	shape_.setSize(size);
 	panel_.setSize(panel_size);
