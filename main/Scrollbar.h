@@ -21,5 +21,6 @@ private:
 	CircleShape circle_;
 	RectangleShape line_, part_;
 	bool part_view_;
+	bool pressed_;
 };
 
