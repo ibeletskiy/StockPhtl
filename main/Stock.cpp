@@ -24,7 +24,7 @@ void Stock::getDelivery() {
 }
 
 void Stock::makeOrder() {
-	std::vector <Package> order;
+	std::vector <Package> order = items_;
 	for (int i = 0; i < items_.size(); ++i) {
 		order[i].setCount(max_count_[i] - case_[i].size());
 	}

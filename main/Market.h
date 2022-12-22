@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Package.h"
+#include "Smart.h"
 
 class Market {
 public:
@@ -13,6 +14,8 @@ public:
 	void performDay();
 
 	bool operator<(Market other);
+
+	friend void Smart::makeOrder(std::vector <Package>& items);
 
 private:
 	int customer_count_;
