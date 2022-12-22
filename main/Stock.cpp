@@ -1,14 +1,14 @@
 #include "Stock.h"
 
-Stock::Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count, Provider* provider,
-	Manager* manager) :
-	balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count), provider_(provider), manager_(manager) {
+Stock::Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, std::vector<int>& max_count, Provider* provider) :
+	balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count), provider_(provider) {
 	std::sort(markets_.begin(), markets_.end(), [](Market* a, Market* b) { return *b < *a; });
 	orders_.resize(markets.size());
 	for (auto& vec : orders_) {
 		vec.resize(items_.size(), 0);
 	}
 	ordered_.resize(items_.size(), 0);
+	manager_ = nullptr;
 }
 
 int Stock::getCaseSize() {
@@ -24,7 +24,7 @@ void Stock::getDelivery() {
 }
 
 void Stock::makeOrder() {
-	std::vector <Package> order;
+	std::vector <Package> order = items_;
 	for (int i = 0; i < items_.size(); ++i) {
 		order[i].setCount(max_count_[i] - case_[i].size());
 	}

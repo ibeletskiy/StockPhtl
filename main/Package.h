@@ -5,6 +5,8 @@ class Package : public Item {
 public:
 	Package(int count_, Item* item) : count_(count_), Item(*item) {}
 
+	Package();
+
 	int getCount() const {
 		return count_;
 	}

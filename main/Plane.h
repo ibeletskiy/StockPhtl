@@ -50,6 +50,20 @@ public:
 		}
 	}
 
+	void initialization() {
+		for (int i = 0; i < markets_cnt_; ++i) {
+			markets_.push_back(new Market(packages_));
+		}
+		provider_ = new Provider(packages_);
+		for (int i = 0; i < packages_.size(); ++i) {
+			max_count_.push_back(50);
+		}
+		stock_ = new Stock(markets_, packages_, max_count_, provider_);
+		manager_ = new Smart();
+		manager_->setStock(stock_);
+		stock_->setManager(manager_);
+	}
+
 	Plane() {
 		back_color_ = Color(13, 18, 43, 255);
 		green_ = Color(130, 209, 25, 255);
@@ -76,6 +90,7 @@ public:
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
+		while (types_ < packages_.size()) packages_.pop_back();
 		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
 		shelves_.resize(6);
 		for (int i = 0; i < shelves_.size(); ++i) {
@@ -86,6 +101,18 @@ public:
 
 		}*/
 
+	}
+
+	void performDay() {
+		stock_->sendDelivery();
+		provider_->performDay();
+		stock_->getDelivery();
+		stock_->makePrices();
+		stock_->getOrder();
+		stock_->makeOrder();
+		for (Market* market : markets_) {
+			market->performDay();
+		}
 	}
 
 	void play() {
@@ -120,20 +147,20 @@ public:
 	}
 
 	void makePackages() {
-		packages_.emplace_back(Package(6, new Item("Молоко", 0, 90, 60, 40, 7, 0.76)));
-		packages_.emplace_back(Package(20, new Item("Хлеб", 1, 70, 50, 30, 4, 0.82)));
-		packages_.emplace_back(Package(12, new Item("Яблоки", 2, 120, 80, 50, 20, 0.32)));
-		packages_.emplace_back(Package(110, new Item("Сырок", 3, 70, 50, 30, 40, 0.12)));
-		packages_.emplace_back(Package(100, new Item("Ролтон", 4, 70, 50, 25, 100000, 0.12)));
-		packages_.emplace_back(Package(25, new Item("Макароны", 5, 80, 55, 30, 100, 0.45)));
-		packages_.emplace_back(Package(60, new Item("Чай", 6, 150, 80, 60, 100, 0.37)));
-		packages_.emplace_back(Package(10, new Item("Помидоры", 7, 200, 140, 120, 7, 0.25)));
-		packages_.emplace_back(Package(32, new Item("Зеленый горошек", 8, 130, 90, 70, 20, 0.7)));
-		packages_.emplace_back(Package(20, new Item("Гречка", 9, 170, 120, 80, 10, 0.2)));
-		packages_.emplace_back(Package(10, new Item("Фарш", 10, 200, 140, 100, 5, 0.18)));
-		packages_.emplace_back(Package(30, new Item("Майонез", 11, 130, 90, 80, 12, 0.7)));
-		packages_.emplace_back(Package(1, new Item("Тараканы", 12, 1000, 999, 998, 900, 1)));
-		packages_.emplace_back(Package(40, new Item("Мюсли", 13, 140, 100, 70, 15, 0.15)));
+		packages_.push_back(Package(6, new Item("Молоко", 0, 90, 60, 40, 7, 0.76)));
+		packages_.push_back(Package(20, new Item("Хлеб", 1, 70, 50, 30, 4, 0.82)));
+		packages_.push_back(Package(12, new Item("Яблоки", 2, 120, 80, 50, 20, 0.32)));
+		packages_.push_back(Package(110, new Item("Сырок", 3, 70, 50, 30, 40, 0.12)));
+		packages_.push_back(Package(100, new Item("Ролтон", 4, 70, 50, 25, 100000, 0.12)));
+		packages_.push_back(Package(25, new Item("Макароны", 5, 80, 55, 30, 100, 0.45)));
+		packages_.push_back(Package(60, new Item("Чай", 6, 150, 80, 60, 100, 0.37)));
+		packages_.push_back(Package(10, new Item("Помидоры", 7, 200, 140, 120, 7, 0.25)));
+		packages_.push_back(Package(32, new Item("Зеленый горошек", 8, 130, 90, 70, 20, 0.7)));
+		packages_.push_back(Package(20, new Item("Гречка", 9, 170, 120, 80, 10, 0.2)));
+		packages_.push_back(Package(10, new Item("Фарш", 10, 200, 140, 100, 5, 0.18)));
+		packages_.push_back(Package(30, new Item("Майонез", 11, 130, 90, 80, 12, 0.7)));
+		packages_.push_back(Package(1, new Item("Тараканы", 12, 1000, 999, 998, 900, 1)));
+		packages_.push_back(Package(40, new Item("Мюсли", 13, 140, 100, 70, 15, 0.15)));
 	}
 
 private:
@@ -152,4 +179,5 @@ private:
 	Manager* manager_;
 	std::vector<Market*> markets_;
 	std::vector <Package> packages_;
+	std::vector <int> max_count_;
 };
