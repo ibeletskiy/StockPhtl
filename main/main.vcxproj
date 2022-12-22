@@ -149,7 +149,6 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Column.cpp" />
-    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Horizontal.cpp" />
     <ClCompile Include="Inputfield.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -164,13 +163,11 @@
     <ClCompile Include="Smart.cpp" />
     <ClCompile Include="Statistic.cpp" />
     <ClCompile Include="Stock.cpp" />
-    <ClCompile Include="Trashcan.cpp" />
     <ClCompile Include="Vertical.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Column.h" />
-    <ClInclude Include="Data.h" />
     <ClInclude Include="Horizontal.h" />
     <ClInclude Include="Inputfield.h" />
     <ClInclude Include="Item.h" />
@@ -184,7 +181,6 @@
     <ClInclude Include="Smart.h" />
     <ClInclude Include="Statistic.h" />
     <ClInclude Include="Stock.h" />
-    <ClInclude Include="Trashcan.h" />
     <ClInclude Include="Vertical.h" />
   </ItemGroup>
   <ItemGroup>

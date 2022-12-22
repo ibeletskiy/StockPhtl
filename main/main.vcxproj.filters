@@ -39,9 +39,6 @@
     <ClCompile Include="Smart.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Provider.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Statistic.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Trashcan.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Column.cpp">
@@ -95,9 +89,6 @@
     <ClInclude Include="Smart.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Provider.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -111,9 +102,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Statistic.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Trashcan.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Column.h">
