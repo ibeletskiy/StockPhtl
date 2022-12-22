@@ -10,9 +10,38 @@
 
 class Plane {
 public:
+
+	void getStart() {
+		RenderWindow window(VideoMode(1000, 800), "get started", Style::Close | Style::Titlebar);
+		InputField days_field();
+		InputField types_field();
+		InputField markets_field();
+		while (window.isOpen()) {
+			Event event;
+			Vector2i mouse_position = Mouse::getPosition(window);
+			while (window.pollEvent(event)) {
+				if (event.type == Event::Closed) {
+					window.close();
+				}
+
+			}
+		}
+	}
 	
 	Plane() {
-		
+		back_color_ = Color();
+		green_ = Color();
+		red_ = Color();
+		grey_ = Color();
+		edges.resize(4);
+		edges[0] = RectangleShape();
+		edges[1] = RectangleShape();
+		edges[2] = RectangleShape();
+		edges[3] = RectangleShape();
+		stats_ = Statistic();
+		days_ = 0;
+		types_ = 0;
+		getStart();
 	}
 	
 	void play();
@@ -29,20 +58,19 @@ public:
 	}
 
 private:
-	// все что нужно заранее (строго в
+	// все что нужно заранее (строго в фронте)
+	Color back_color_, green_, red_, grey_;
 	std::vector<RectangleShape> edges;
-	
+	Statistic stats_;
+	std::vector<Button> shelves_;
+	std::vector<Button> market_buttons_;
+	Button manager_choose_;
 
-
-
-	int days_;
-	int types_;
+	int days_, types_, markets_;
 	Provider* provider_;
 	Stock* stock_;
 	Manager* manager_;
 	std::vector<Market*> markets_;
-	std::vector<Button> market_buttons_;
-	std::vector<Button> shelves_;
 	std::vector <Package> packages_;
 	Statistic stats_;
 };
