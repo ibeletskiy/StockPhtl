@@ -45,7 +45,7 @@ public:
 			types_ = std::min(17, std::stoi(types_field.getValue()));
 		}
 		if (markets_field.getValue() != L"") {
-			markets_ = std::min(9, std::stoi(markets_field.getValue()));
+			markets_cnt_ = std::min(9, std::stoi(markets_field.getValue()));
 		}
 	}
 	
@@ -62,9 +62,14 @@ public:
 		stats_ = Statistic();
 		days_ = 0;
 		types_ = 0;
-		markets_ = 0;
+		markets_cnt_ = 0;
 		getStart();
-		
+		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
+		shelves_.resize(stock_->getCaseSize());
+		for (int i = 0; i < shelves_.size(); ++i) {
+			
+		}
+
 	}
 	
 	void play();
@@ -89,11 +94,10 @@ private:
 	std::vector<Button> market_buttons_;
 	Button manager_choose_, types_choose_;
 
-	int days_, types_, markets_;
+	int days_, types_, markets_cnt_;
 	Provider* provider_;
 	Stock* stock_;
 	Manager* manager_;
 	std::vector<Market*> markets_;
 	std::vector <Package> packages_;
-	Statistic stats_;
 };

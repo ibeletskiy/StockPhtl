@@ -11,6 +11,10 @@ Stock::Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, st
 	ordered_.resize(items_.size(), 0);
 }
 
+int Stock::getCaseSize() {
+	return (int)case_.size();
+}
+
 void Stock::getDelivery() {
 	std::vector <Package> order = provider_->sendDelivery();
 	for (Package package : order) {
