@@ -157,6 +157,7 @@
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Provider.cpp" />
+    <ClCompile Include="Scrollbar.cpp" />
     <ClCompile Include="Simple.cpp" />
     <ClCompile Include="Smart.cpp" />
     <ClCompile Include="Statistic.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Package.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Provider.h" />
+    <ClInclude Include="Scrollbar.h" />
     <ClInclude Include="Simple.h" />
     <ClInclude Include="Smart.h" />
     <ClInclude Include="Statistic.h" />
