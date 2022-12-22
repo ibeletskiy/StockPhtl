@@ -50,15 +50,15 @@ public:
 	}
 
 	Plane() {
-		back_color_ = Color();
-		green_ = Color();
-		red_ = Color();
-		grey_ = Color();
-		edges.resize(4);
-		edges[0] = RectangleShape();
-		edges[1] = RectangleShape();
-		edges[2] = RectangleShape();
-		edges[3] = RectangleShape();
+		back_color_ = Color(13, 18, 43, 255);
+		green_ = Color(130, 209, 25, 255);
+		red_ = Color(182, 13, 58, 255);
+		grey_ = Color(204, 204, 204, 255);
+		edges_.resize(4);
+		edges_[0] = RectangleShape();
+		edges_[1] = RectangleShape();
+		edges_[2] = RectangleShape();
+		edges_[3] = RectangleShape();
 		stats_ = Statistic();
 		manager_choose_ = Button();
 		types_choose_ = Button();
@@ -66,28 +66,45 @@ public:
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
-		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли - грустно
-		shelves_.resize(stock_->getCaseSize());
+		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
+		/*shelves_.resize(stock_->getCaseSize());
 		for (int i = 0; i < shelves_.size(); ++i) {
 
 		}
 		market_buttons_.resize(markets_cnt_);
 		for (int i = 0; i < market_buttons_.size(); ++i) {
 
-		}
+		}*/
 
 	}
 
 	void play() {
 		RenderWindow window(VideoMode(1000, 800), "simulation", Style::Close | Style::Titlebar);
-		while (window.isOpen()) {
-			Event event;
-			Vector2i mouse_position = Mouse::getPosition(window);
-			while (window.pollEvent(event)) {
-				if (event.type == Event::Closed) {
-					window.close();
+		for (int day = 0; day < days_; ++day) {
+			while (window.isOpen()) {
+				window.clear(back_color_);
+				Event event;
+				Vector2i mouse_position = Mouse::getPosition(window);
+				while (window.pollEvent(event)) {
+					if (event.type == Event::Closed) {
+						window.close();
+					}
 				}
+				for (auto& now : shelves_) {
+					now.draw(window);
+				}
+				for (auto& now : edges_) {
+					window.draw(now);
+				}
+				manager_choose_.draw(window);
+				types_choose_.draw(window);
+				stats_.draw(window, mouse_position);
+				for (auto& now : market_buttons_) {
+					now.draw(window);
+				}
+				window.display();
 			}
+			// тут должно быть все исполнение кода 
 		}
 	}
 
@@ -111,7 +128,7 @@ public:
 private:
 	// все что нужно заранее (строго в фронте)
 	Color back_color_, green_, red_, grey_;
-	std::vector<RectangleShape> edges;
+	std::vector<RectangleShape> edges_;
 	Button manager_choose_, types_choose_;
 	Statistic stats_;
 	std::vector<Button> shelves_;
