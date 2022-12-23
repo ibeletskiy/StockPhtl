@@ -18,7 +18,7 @@ public:
 	void setCount(int count);
 
 	int getCount() const {
-		return count_;
+		return customer_count_;
 	}
 
 	friend void Smart::makeOrder(std::vector <Package>& items);
