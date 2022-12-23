@@ -42,3 +42,10 @@ void Market::performDay() {
 bool Market::operator<(Market other) {
 	return this->customer_count_ < other.customer_count_;
 }
+
+void Market::setCount(int count) {
+	customer_count_ = count;
+	for (int i = 0; i < shelf_.size(); ++i) {
+		max_count_[i] = customer_count_ * shelf_[i].getInterest() * shelf_[i].getDuration();
+	}
+}
