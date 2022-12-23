@@ -35,8 +35,15 @@ public:
 	void setManager(Manager* manager);
 
 	void setPrice(int it, int price, int discount) {
+		bool disc = items_[it].isDiscount();
 		items_[it].setNewPrice(price);
 		items_[it].setNewDiscount(discount);
+		if (disc) {
+			items_[it].setDiscount();
+		}
+		else {
+			items_[it].deleteDiscount();
+		}
 	}
 
 	friend void Smart::makeOrder(std::vector <Package>& items);
