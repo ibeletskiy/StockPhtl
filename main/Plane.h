@@ -109,7 +109,7 @@ public:
 		types_ = 1;
 		markets_cnt_ = 1;
 		getStart();
-		stats_ = Statistic({ 1300, 165 }, { 105, 35 }, days_);
+		stats_ = Statistic({ 1250, 165 }, { 85, 35 }, days_);
 		stats_.setColor(green_, red_);
 		stats_.setTextColor(Color::White);
 		shuffle(packages_.begin(), packages_.end(), rnd);
@@ -152,10 +152,14 @@ public:
 
 	void changePackage(int ind) {
 		RenderWindow window(VideoMode(600, 400), "change item", Style::Close | Style::Titlebar);
-		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
-		days_field.setTitle(L"Количество дней", 17, Color::White);
-		days_field.setTitlePosition({ 232, 100 });
-		days_field.setOnlyNumbers(true);
+		InputField cost({ 200, 40 }, { 200, 50 }, grey_, 1);
+		cost.setTitle(L"Цена", 17, Color::White);
+		cost.setTitlePosition({ 279, 100 });
+		cost.setOnlyNumbers(true);
+		InputField discount({ 200, 40 }, { 200, 150 }, grey_, 1);
+		discount.setTitle(L"Скидка", 17, Color::White);
+		discount.setTitlePosition({ 269, 200 });
+		discount.setOnlyNumbers(true);
 		while (window.isOpen()) {
 			window.clear(back_color_);
 			Event event;
@@ -164,10 +168,12 @@ public:
 				if (event.type == Event::Closed) {
 					window.close();
 				}
-				days_field.change(event, mouse_position);
+				cost.change(event, mouse_position);
+				discount.change(event, mouse_position);
 			}
 
-			days_field.draw(window);
+			discount.draw(window);
+			cost.draw(window);
 
 			window.display();
 		}
@@ -175,10 +181,10 @@ public:
 
 	void changeMarket(int ind) {
 		RenderWindow window(VideoMode(600, 400), "change item", Style::Close | Style::Titlebar);
-		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
-		days_field.setTitle(L"Количество дней", 17, Color::White);
-		days_field.setTitlePosition({ 232, 100 });
-		days_field.setOnlyNumbers(true);
+		InputField customers({ 200, 40 }, { 200, 50 }, grey_, 1);
+		customers.setTitle(L"Количество покупателей", 17, Color::White);
+		customers.setTitlePosition({ 205, 100 });
+		customers.setOnlyNumbers(true);
 		while (window.isOpen()) {
 			window.clear(back_color_);
 			Event event;
@@ -187,18 +193,19 @@ public:
 				if (event.type == Event::Closed) {
 					window.close();
 				}
-				days_field.change(event, mouse_position);
+				customers.change(event, mouse_position);
 			}
 
-			days_field.draw(window);
+			customers.draw(window);
 
 			window.display();
 		}
+		
 	}
 
 	void play() {
 		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
-		for (int day = 0; day < days_; ++day) {
+		for (int day = 0; day <= days_; ++day) {
 			bool end = false, check = true;
 			while (window.isOpen() && check) {
 				window.clear(back_color_);
