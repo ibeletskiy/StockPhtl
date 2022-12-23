@@ -20,6 +20,7 @@ void Button::setTitle(std::wstring name, int size, Color color) {
 	title_.setFillColor(color);
 }
 
+
 Vector2f Button::getPosition() {
 	return field_.getPosition();
 }

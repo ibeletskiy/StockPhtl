@@ -5,6 +5,7 @@
 static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 Provider::Provider(std::vector<Package>& basic_shelf) {
+	item_queue_.resize(basic_shelf.size());
 	for (auto package : basic_shelf) {
 		volume_.push_back(package.getCount());
 	}

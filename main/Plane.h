@@ -15,14 +15,19 @@ static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().cou
 
 class Plane {
 public:
-
 	void getStart() {
-		RenderWindow window(VideoMode(1400, 1000), "get started", Style::Close | Style::Titlebar);
-		InputField days_field({ 1, 1 }, { 1, 1 }, Color::White);
+		RenderWindow window(VideoMode(600, 400), "get started", Style::Close | Style::Titlebar);
+		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
+		days_field.setTitle(L"Количество дней", 17, Color::White);
+		days_field.setTitlePosition({ 232, 100 });
 		days_field.setOnlyNumbers(true);
-		InputField types_field({ 1, 1 }, { 1, 1 }, Color::White);
+		InputField types_field({ 200, 40 }, { 200, 150 }, grey_, 1);
+		types_field.setTitle(L"Количество типов", 17, Color::White);
+		types_field.setTitlePosition({ 228, 200 });
 		types_field.setOnlyNumbers(true);
-		InputField markets_field({ 1, 1 }, { 1, 1 }, Color::White);
+		InputField markets_field({ 200, 40 }, { 200, 250 }, grey_, 1);
+		markets_field.setTitle(L"Количество магазинов", 17, Color::White);
+		markets_field.setTitlePosition({ 210, 300 });
 		markets_field.setOnlyNumbers(true);
 		while (window.isOpen()) {
 			window.clear(back_color_);
@@ -47,7 +52,7 @@ public:
 			days_ = std::min(30, std::stoi(days_field.getValue()));
 		}
 		if (types_field.getValue() != L"") {
-			types_ = std::min(17, std::stoi(types_field.getValue()));
+			types_ = std::min(14, std::stoi(types_field.getValue()));
 		}
 		if (markets_field.getValue() != L"") {
 			markets_cnt_ = std::min(9, std::stoi(markets_field.getValue()));
@@ -76,6 +81,7 @@ public:
 	}
 
 	Plane() {
+		makePackages();
 		back_color_ = Color(13, 18, 43, 255);
 		green_ = Color(130, 209, 25, 255);
 		red_ = Color(182, 13, 58, 255);
@@ -103,12 +109,15 @@ public:
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
-		shuffle(packages_.begin(), packages_.end(), rnd);
+		//shuffle(packages_.begin(), packages_.end(), rnd);
 		while (types_ < packages_.size()) packages_.pop_back();
 		initialization();
-		shelves_.resize(10);
+		shelves_.resize(types_);
 		for (int i = 0; i < shelves_.size(); ++i) {
-			shelves_[i] = Button({ 738, 79 }, Vector2f(61, 401 + 81 * i), green_, 1);
+			shelves_[i] = Button({ 738, 79 }, Vector2f(61, 402 + 81 * i), green_, 1);
+			shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(packages_[i].getCount()) +
+				L" packages" + L" - " + std::to_wstring(packages_[i].getActual()) + L" $", 30, Color::White);
+			shelves_[i].setTitlePosition(Vector2f(86, 422 + 81 * i));
 		}
 		/*market_buttons_.resize(markets_cnt_);
 		for (int i = 0; i < market_buttons_.size(); ++i) {
@@ -133,6 +142,15 @@ public:
 		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
 			bool end = false, check = true;
+			for (int i = 0; i < shelves_.size(); ++i) {
+				if (packages_[i].isDiscount()) {
+					shelves_[i].setButtonColor(red_);
+				} else {
+					shelves_[i].setButtonColor(green_);
+				}
+				shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(packages_[i].getCount()) +
+					L" packages" + L" - " + std::to_wstring(packages_[i].getActual()) + L" $", 30, Color::White);
+			}
 			while (window.isOpen() && check) {
 				window.clear(back_color_);
 				Event event;
@@ -147,17 +165,16 @@ public:
 						break;
 					}
 					bar_.changeCircle(mouse_position, event);
-					if (bar_.isChosen()) {
+					if (bar_.isChosen() && !shelves_.empty()) {
 						double value = bar_.getValue() * (shelves_.back().getPosition().y - shelves_[0].getPosition().y);
 						for (int i = 0; i < shelves_.size(); ++i) {
-							shelves_[i].setButtonPosition(Vector2f(60, 400 + 81 * i - value));
+							shelves_[i].setButtonPosition(Vector2f(61, 402 + 81 * i - value));
+							shelves_[i].setTitlePosition(Vector2f(86, 422 + 81 * i - value));
 						}
 					}
-					if (insideArea(mouse_position)) {
-						for (auto& now : shelves_) {
-							if (now.pressed(mouse_position, event)) {
-								// open 
-							}
+					for (auto& now : shelves_) {
+						if (now.pressed(mouse_position, event) && insideArea(mouse_position)) {
+							// open 
 						}
 					}
 				}
@@ -182,20 +199,20 @@ public:
 	}
 
 	void makePackages() {
-		packages_.push_back(Package(6, new Item("Молоко", 0, 90, 60, 40, 7, 0.76)));
-		packages_.push_back(Package(20, new Item("Хлеб", 1, 70, 50, 30, 4, 0.82)));
-		packages_.push_back(Package(12, new Item("Яблоки", 2, 120, 80, 50, 20, 0.32)));
-		packages_.push_back(Package(110, new Item("Сырок", 3, 70, 50, 30, 40, 0.12)));
-		packages_.push_back(Package(100, new Item("Ролтон", 4, 70, 50, 25, 100000, 0.12)));
-		packages_.push_back(Package(25, new Item("Макароны", 5, 80, 55, 30, 100, 0.45)));
-		packages_.push_back(Package(60, new Item("Чай", 6, 150, 80, 60, 100, 0.37)));
-		packages_.push_back(Package(10, new Item("Помидоры", 7, 200, 140, 120, 7, 0.25)));
-		packages_.push_back(Package(32, new Item("Зеленый горошек", 8, 130, 90, 70, 20, 0.7)));
-		packages_.push_back(Package(20, new Item("Гречка", 9, 170, 120, 80, 10, 0.2)));
-		packages_.push_back(Package(10, new Item("Фарш", 10, 200, 140, 100, 5, 0.18)));
-		packages_.push_back(Package(30, new Item("Майонез", 11, 130, 90, 80, 12, 0.7)));
-		packages_.push_back(Package(1, new Item("Тараканы", 12, 1000, 999, 998, 900, 1)));
-		packages_.push_back(Package(40, new Item("Мюсли", 13, 140, 100, 70, 15, 0.15)));
+		packages_.push_back(Package(6, new Item(L"Молоко", 0, 90, 60, 40, 7, 0.76)));
+		packages_.push_back(Package(20, new Item(L"Хлеб", 1, 70, 50, 30, 4, 0.82)));
+		packages_.push_back(Package(12, new Item(L"Яблоки", 2, 120, 80, 50, 20, 0.32)));
+		packages_.push_back(Package(110, new Item(L"Сырок", 3, 70, 50, 30, 40, 0.12)));
+		packages_.push_back(Package(100, new Item(L"Ролтон", 4, 70, 50, 25, 100000, 0.12)));
+		packages_.push_back(Package(25, new Item(L"Макароны", 5, 80, 55, 30, 100, 0.45)));
+		packages_.push_back(Package(60, new Item(L"Чай", 6, 150, 80, 60, 100, 0.37)));
+		packages_.push_back(Package(10, new Item(L"Помидоры", 7, 200, 140, 120, 7, 0.25)));
+		packages_.push_back(Package(32, new Item(L"Зеленый горошек", 8, 130, 90, 70, 20, 0.7)));
+		packages_.push_back(Package(20, new Item(L"Гречка", 9, 170, 120, 80, 10, 0.2)));
+		packages_.push_back(Package(10, new Item(L"Фарш", 10, 200, 140, 100, 5, 0.18)));
+		packages_.push_back(Package(30, new Item(L"Майонез", 11, 130, 90, 80, 12, 0.7)));
+		packages_.push_back(Package(1, new Item(L"Тараканы", 12, 1000, 999, 998, 900, 1)));
+		packages_.push_back(Package(40, new Item(L"Мюсли", 13, 140, 100, 70, 15, 0.15)));
 	}
 
 private:

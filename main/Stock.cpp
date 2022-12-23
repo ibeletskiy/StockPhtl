@@ -4,6 +4,7 @@ Stock::Stock(std::vector<Market*> markets, std::vector<Package>& basic_shelf, st
 	balance_(0), day_(0), markets_(markets), items_(basic_shelf), max_count_(max_count), provider_(provider) {
 	std::sort(markets_.begin(), markets_.end(), [](Market* a, Market* b) { return *b < *a; });
 	orders_.resize(markets.size());
+	case_.resize(basic_shelf.size());
 	for (auto& vec : orders_) {
 		vec.resize(items_.size(), 0);
 	}

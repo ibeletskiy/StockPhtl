@@ -3,12 +3,16 @@
 
 class Item {
 public:
-	Item(std::string name_, int number_, int price_, int discount_, int wholesale_, int duration_, double interest_) :
+	Item(std::wstring name_, int number_, int price_, int discount_, int wholesale_, int duration_, double interest_) :
 		name_(name_), number_(number_), price_(price_), actual_(price_), discount_(discount_), wholesale_(wholesale_),
 		duration_(duration_), interest_(interest_), is_discount_(0) {}
 
 	int getActual() const {
 		return actual_;
+	}
+
+	std::wstring getName() const {
+		return name_;
 	}
 
 	bool isDiscount() const {
@@ -48,7 +52,7 @@ public:
 	}
 
 protected:
-	std::string name_;
+	std::wstring name_;
 	int number_;
 	int actual_;
 	int price_;
