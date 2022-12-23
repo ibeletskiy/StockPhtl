@@ -8,6 +8,10 @@
 #include "Scrollbar.h"
 #include "Inputfield.h"
 #include <vector>
+#include <random>
+#include <chrono>
+
+static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 class Plane {
 public:
@@ -90,6 +94,7 @@ public:
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
+		shuffle(packages_.begin(), packages_.end(), rnd);
 		while (types_ < packages_.size()) packages_.pop_back();
 		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
 		shelves_.resize(6);
