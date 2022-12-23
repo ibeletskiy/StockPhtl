@@ -59,6 +59,14 @@ public:
 		number_ = n;
 	}
 
+	void setNewPrice(int price) {
+		price_ = price;
+	}
+
+	void setNewDiscount(int discount) {
+		discount_ = discount;
+	}
+
 protected:
 	std::wstring name_;
 	int number_;
