@@ -34,6 +34,11 @@ public:
 
 	void setManager(Manager* manager);
 
+	void setPrice(int it, int price, int discount) {
+		items_[it].setNewPrice(price);
+		items_[it].setNewDiscount(discount);
+	}
+
 	friend void Smart::makeOrder(std::vector <Package>& items);
 	friend void Simple::makeOrder(std::vector <Package>& items);
 	friend void Smart::makePrices(std::vector <Package>& items);
