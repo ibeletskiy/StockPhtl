@@ -46,6 +46,6 @@ bool Market::operator<(Market other) {
 void Market::setCount(int count) {
 	customer_count_ = count;
 	for (int i = 0; i < shelf_.size(); ++i) {
-		max_count_[i] = customer_count_ *shelf_[i].getInterest() * shelf_[i].getDuration();
+		max_count_[i] = customer_count_ * shelf_[i].getInterest() * shelf_[i].getDuration();
 	}
 }
