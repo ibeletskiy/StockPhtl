@@ -50,6 +50,10 @@ public:
 		}
 	}
 
+	void sortMarkets() {
+		std::sort(markets_.begin(), markets_.end(), [](Market* a, Market* b) { return *b < *a; });
+	}
+
 	friend void Smart::makeOrder(std::vector <Package>& items);
 	friend void Simple::makeOrder(std::vector <Package>& items);
 	friend void Smart::makePrices(std::vector <Package>& items);
