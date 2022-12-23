@@ -200,7 +200,6 @@ public:
 
 			window.display();
 		}
-		
 	}
 
 	void play() {
