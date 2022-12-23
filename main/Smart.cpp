@@ -11,7 +11,7 @@ void Smart::makeOrder(std::vector <Package>& order) {
 		{
 			int cnt = 0;
 			for (Market* market : stock_->markets_) {
-				cnt += std::max(0.0, market->max_count_[item.getNumber()] * 0.4 - market->shelf_[item.getNumber()].getCount());
+				cnt += std::max(0.0, market->max_count_[item.getNumber()] * 0.8 - market->shelf_[item.getNumber()].getCount());
 			}
 			cnt /= stock_->items_[item.getNumber()].getCount();
 			cnt = std::min(cnt, stock_->max_count_[item.getNumber()]);

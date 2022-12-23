@@ -9,6 +9,7 @@ Market::Market(std::vector<Package>& basic_shelf) {
 	for (Package package : basic_shelf) {
 		shelf_.push_back(package);
 		max_count_.push_back(customer_count_ * package.getInterest() * package.getDuration());
+		shelf_.back().setCount(0);
 	}
 }
 

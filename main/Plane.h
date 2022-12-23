@@ -67,12 +67,9 @@ public:
 		}
 		provider_ = new Provider(packages_);
 		for (int i = 0; i < packages_.size(); ++i) {
-			max_count_.push_back(100);
+			max_count_.push_back(50);
 		}
 		stock_ = new Stock(markets_, packages_, max_count_, provider_);
-		manager_ = new Smart();
-		manager_->setStock(stock_);
-		stock_->setManager(manager_);
 	}
 
 	bool insideArea(Vector2i mouse_position) {
@@ -115,8 +112,11 @@ public:
 		stats_ = Statistic({ 1300, 165 }, { 105, 35 }, days_);
 		stats_.setColor(green_, red_);
 		stats_.setTextColor(Color::White);
-		//shuffle(packages_.begin(), packages_.end(), rnd);
+		shuffle(packages_.begin(), packages_.end(), rnd);
 		while (types_ < packages_.size()) packages_.pop_back();
+		for (int i = 0; i < packages_.size(); ++i) {
+			packages_[i].setNumber(i);
+		}
 		initialization();
 		shelves_.resize(types_);
 		for (int i = 0; i < shelves_.size(); ++i) {
@@ -135,6 +135,10 @@ public:
 	}
 
 	void performDay() {
+		if (!smart_) manager_ = new Simple();
+		else manager_ = new Smart();
+		manager_->setStock(stock_);
+		stock_->setManager(manager_);
 		stock_->sendDelivery();
 		provider_->performDay();
 		stock_->getDelivery();
@@ -270,20 +274,20 @@ public:
 	}
 
 	void makePackages() {
-		packages_.push_back(Package(6, new Item(L"Молоко", 0, 90, 60, 40, 7, 0.76)));
-		packages_.push_back(Package(20, new Item(L"Хлеб", 1, 70, 50, 30, 4, 0.82)));
-		packages_.push_back(Package(12, new Item(L"Яблоки", 2, 120, 80, 50, 20, 0.32)));
-		packages_.push_back(Package(110, new Item(L"Сырок", 3, 70, 50, 30, 40, 0.12)));
-		packages_.push_back(Package(100, new Item(L"Ролтон", 4, 70, 50, 25, 100000, 0.12)));
-		packages_.push_back(Package(25, new Item(L"Макароны", 5, 80, 55, 30, 100, 0.45)));
-		packages_.push_back(Package(60, new Item(L"Чай", 6, 150, 80, 60, 100, 0.37)));
-		packages_.push_back(Package(10, new Item(L"Помидоры", 7, 200, 140, 120, 7, 0.25)));
-		packages_.push_back(Package(32, new Item(L"Зеленый горошек", 8, 130, 90, 70, 20, 0.7)));
-		packages_.push_back(Package(20, new Item(L"Гречка", 9, 170, 120, 80, 10, 0.2)));
-		packages_.push_back(Package(10, new Item(L"Фарш", 10, 200, 140, 100, 5, 0.18)));
-		packages_.push_back(Package(30, new Item(L"Майонез", 11, 130, 90, 80, 12, 0.7)));
-		packages_.push_back(Package(1, new Item(L"Тараканы", 12, 1000, 999, 998, 900, 1)));
-		packages_.push_back(Package(40, new Item(L"Мюсли", 13, 140, 100, 70, 15, 0.15)));
+		packages_.push_back(Package(6, new Item(L"Молоко", 0, 9, 6, 4, 7, 0.76)));
+		packages_.push_back(Package(20, new Item(L"Хлеб", 1, 7, 5, 3, 4, 0.82)));
+		packages_.push_back(Package(12, new Item(L"Яблоки", 2, 12, 8, 5, 20, 0.32)));
+		packages_.push_back(Package(110, new Item(L"Сырок", 3, 7, 5, 3, 40, 0.12)));
+		packages_.push_back(Package(100, new Item(L"Ролтон", 4, 7, 5, 3, 100000, 0.12)));
+		packages_.push_back(Package(25, new Item(L"Макароны", 5, 8, 5, 3, 100, 0.45)));
+		packages_.push_back(Package(60, new Item(L"Чай", 6, 15, 10, 8, 100, 0.37)));
+		packages_.push_back(Package(10, new Item(L"Помидоры", 7, 20, 14, 12, 7, 0.25)));
+		packages_.push_back(Package(32, new Item(L"Зеленый горошек", 8, 13, 9, 7, 20, 0.7)));
+		packages_.push_back(Package(20, new Item(L"Гречка", 9, 17, 12, 8, 10, 0.2)));
+		packages_.push_back(Package(10, new Item(L"Фарш", 10, 20, 14, 10, 5, 0.18)));
+		packages_.push_back(Package(30, new Item(L"Майонез", 11, 13, 9, 8, 12, 0.7)));
+		packages_.push_back(Package(1, new Item(L"Тараканы", 12, 100, 99, 99, 900, 1)));
+		packages_.push_back(Package(40, new Item(L"Мюсли", 13, 14, 10, 7, 15, 0.15)));
 	}
 
 private:

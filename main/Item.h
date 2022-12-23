@@ -55,6 +55,10 @@ public:
 		return wholesale_;
 	}
 
+	void setNumber(int n) {
+		number_ = n;
+	}
+
 protected:
 	std::wstring name_;
 	int number_;
