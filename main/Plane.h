@@ -121,10 +121,12 @@ public:
 				L" packages" + L" - " + std::to_wstring(stock_->getCost(i)) + L" $", 30, Color::White);
 			shelves_[i].setTitlePosition(Vector2f(86, 422 + 81 * i));
 		}
-		/*market_buttons_.resize(markets_cnt_);
+		market_buttons_.resize(markets_cnt_);
 		for (int i = 0; i < market_buttons_.size(); ++i) {
-
-		}*/
+			market_buttons_[i] = Button({ 120, 100 }, Vector2f(880 + (i % 3) * 160, 400 + (i / 3) * 160), grey_, 1);
+			market_buttons_[i].setTitle(std::to_wstring(i + 1), 30);
+			market_buttons_[i].setTitlePosition(Vector2f(930 + (i % 3) * 160, 430 + (i / 3) * 160));
+		}
 
 	}
 
@@ -169,6 +171,11 @@ public:
 					for (auto& now : shelves_) {
 						if (now.pressed(mouse_position, event) && insideArea(mouse_position)) {
 							// open 
+						}
+					}
+					for (auto& now : market_buttons_) {
+						if (now.pressed(mouse_position, event)) {
+							// open
 						}
 					}
 				}
