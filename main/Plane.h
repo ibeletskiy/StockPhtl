@@ -7,6 +7,8 @@
 #include "Statistic.h"
 #include "Scrollbar.h"
 #include "Inputfield.h"
+#include "Smart.h"
+#include "Simple.h"
 #include <vector>
 #include <random>
 #include <chrono>
@@ -99,7 +101,10 @@ public:
 		edges_[3] = RectangleShape({1400, 35});
 		edges_[3].setPosition({0, 965});
 		edges_[3].setFillColor(back_color_);
-		//manager_choose_ = Button(); ?? у нас теперь нет двух менеджеров?
+		manager_choose_ = Button({ 300, 79 }, {950, 890}, grey_, 1);
+		manager_choose_.setTitle(L"Smart", 40);
+		manager_choose_.setTitlePosition({ 1040, 905 });
+		smart_ = true;
 		// types_choose_ = Button(); do this позже
 		bar_ = ScrollBar(12, 565, { 30, 400 });
 		bar_.setCircleColor(Color::White);
@@ -178,6 +183,17 @@ public:
 							// open
 						}
 					}
+
+					if (manager_choose_.pressed(mouse_position, event)) {
+						if (smart_) {
+							manager_ = new Simple();
+							manager_choose_.setTitle(L"Simple", 40);
+						} else {
+							manager_ = new Smart();
+							manager_choose_.setTitle(L"Smart", 40);
+						}
+						smart_ = !smart_;
+					}
 				}
 				for (auto& now : shelves_) {
 					now.draw(window);
@@ -237,6 +253,7 @@ private:
 	std::vector<Button> market_buttons_;
 	ScrollBar bar_;
 
+	bool smart_;
 	int days_, types_, markets_cnt_;
 	Provider* provider_;
 	Stock* stock_;
