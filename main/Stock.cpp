@@ -36,6 +36,18 @@ void Stock::makeOrder() {
 	}
 }
 
+int Stock::getCaseCount(int i) {
+	return case_[i].size();
+}
+
+int Stock::getCost(int i) {
+	return items_[i].getActual();
+}
+
+int Stock::getBalance() {
+	return balance_;
+}
+
 void Stock::makePrices() {
 	manager_->makePrices(items_);
 }

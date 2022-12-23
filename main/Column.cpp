@@ -18,6 +18,10 @@ void Column::setPosition(Vector2f pos) {
 	shape_.setPosition(Vector2f(pos.x, pos.y - shape_.getSize().y));
 }
 
+void Column::setColor(Color color) {
+	shape_.setFillColor(color);
+}
+
 void Column::setValue(float val, int real) {
 	shape_.setPosition(Vector2f(shape_.getPosition().x, shape_.getPosition().y + shape_.getSize().y - val));
 	shape_.setSize(Vector2f(shape_.getSize().x, val));

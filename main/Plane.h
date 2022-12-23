@@ -99,9 +99,8 @@ public:
 		edges_[3] = RectangleShape({1400, 35});
 		edges_[3].setPosition({0, 965});
 		edges_[3].setFillColor(back_color_);
-		stats_ = Statistic();
-		manager_choose_ = Button();
-		types_choose_ = Button();
+		//manager_choose_ = Button(); ?? у нас теперь нет двух менеджеров?
+		// types_choose_ = Button(); do this позже
 		bar_ = ScrollBar(12, 565, { 30, 400 });
 		bar_.setCircleColor(Color::White);
 		bar_.setLineColor(grey_);
@@ -109,14 +108,17 @@ public:
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
+		stats_ = Statistic({ 1300, 165 }, { 65, 35 }, days_);
+		stats_.setColor(green_, red_);
+		stats_.setTextColor(Color::White);
 		//shuffle(packages_.begin(), packages_.end(), rnd);
 		while (types_ < packages_.size()) packages_.pop_back();
 		initialization();
 		shelves_.resize(types_);
 		for (int i = 0; i < shelves_.size(); ++i) {
 			shelves_[i] = Button({ 738, 79 }, Vector2f(61, 402 + 81 * i), green_, 1);
-			shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(packages_[i].getCount()) +
-				L" packages" + L" - " + std::to_wstring(packages_[i].getActual()) + L" $", 30, Color::White);
+			shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(stock_->getCaseCount(i)) +
+				L" packages" + L" - " + std::to_wstring(stock_->getCost(i)) + L" $", 30, Color::White);
 			shelves_[i].setTitlePosition(Vector2f(86, 422 + 81 * i));
 		}
 		/*market_buttons_.resize(markets_cnt_);
@@ -139,18 +141,10 @@ public:
 	}
 
 	void play() {
+		int temp_balance = 0;
 		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
 			bool end = false, check = true;
-			for (int i = 0; i < shelves_.size(); ++i) {
-				if (packages_[i].isDiscount()) {
-					shelves_[i].setButtonColor(red_);
-				} else {
-					shelves_[i].setButtonColor(green_);
-				}
-				shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(packages_[i].getCount()) +
-					L" packages" + L" - " + std::to_wstring(packages_[i].getActual()) + L" $", 30, Color::White);
-			}
 			while (window.isOpen() && check) {
 				window.clear(back_color_);
 				Event event;
@@ -195,6 +189,17 @@ public:
 			}
 			if (end) break;
 			performDay();
+			for (int i = 0; i < shelves_.size(); ++i) {
+				if (packages_[i].isDiscount()) {
+					shelves_[i].setButtonColor(red_);
+				} else {
+					shelves_[i].setButtonColor(green_);
+				}
+				shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(stock_->getCaseCount(i)) +
+					L" packages" + L" - " + std::to_wstring(stock_->getCost(i)) + L" $", 30, Color::White);
+			}
+			stats_.addValue(stock_->getBalance() - temp_balance);
+			temp_balance = stock_->getBalance();
 		}
 	}
 

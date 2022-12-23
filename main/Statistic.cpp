@@ -31,15 +31,40 @@ void Statistic::addValue(int value) {
 		}
 	}
 	if (pointer_ != stats_.size()) {
-		stats_[pointer_++].setValue(((double)value / max_) * size_.y, value);
+		stats_[pointer_].setValue(((double)value / max_) * size_.y, value);
+		if (value < 0) {
+			stats_[pointer_].setColor(bad_);
+		} else {
+			stats_[pointer_].setColor(good_);
+		}
+		++pointer_;
 	} else {
 		stats_.push_back(Column(Vector2f(0, ((double)value / max_) * size_.y), position_, value));
 		for (int i = 0; i < stats_.size(); ++i) {
 			stats_[i].setPosition(Vector2f(position_.x + ((double)size_.x / stats_.size() + 1) * i, position_.y + size_.y));
 			stats_[i].setSize((double)size_.x / stats_.size());
 		}
+		if (value < 0) {
+			stats_[pointer_].setColor(bad_);
+		} else {
+			stats_[pointer_].setColor(good_);
+		}
 		++pointer_;
 	}
+}
+
+int Statistic::getValue(int i) {
+	return stats_[i].getValue();
+}
+
+void Statistic::setColor(Color good, Color bad) {
+	good_ = good;
+	bad_ = bad;
+}
+
+void Statistic::setTextColor(Color color) {
+	zero_.setFillColor(color);
+	max_text_.setFillColor(color);
 }
 
 void Statistic::draw(RenderWindow& window, Vector2i mouse) {

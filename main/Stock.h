@@ -14,6 +14,12 @@ public:
 
 	int getCaseSize();
 
+	int getCaseCount(int i);
+
+	int getCost(int i);
+
+	int getBalance();
+
 	void getDelivery();
 
 	void makeOrder();
