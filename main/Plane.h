@@ -18,7 +18,7 @@ static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().cou
 class Plane {
 public:
 	void getStart() {
-		RenderWindow window(VideoMode(600, 400), "get started", Style::Close | Style::Titlebar);
+		RenderWindow window(VideoMode(600, 375), "get started", Style::Close | Style::Titlebar);
 		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
 		days_field.setTitle(L"Количество дней", 17, Color::White);
 		days_field.setTitlePosition({ 232, 100 });
@@ -105,15 +105,14 @@ public:
 		manager_choose_.setTitle(L"Smart", 40);
 		manager_choose_.setTitlePosition({ 1040, 905 });
 		smart_ = true;
-		// types_choose_ = Button(); do this позже
 		bar_ = ScrollBar(12, 565, { 30, 400 });
 		bar_.setCircleColor(Color::White);
 		bar_.setLineColor(grey_);
 		days_ = 1;
-		types_ = 0;
-		markets_cnt_ = 0;
+		types_ = 1;
+		markets_cnt_ = 1;
 		getStart();
-		stats_ = Statistic({ 1300, 165 }, { 65, 35 }, days_);
+		stats_ = Statistic({ 1300, 165 }, { 105, 35 }, days_);
 		stats_.setColor(green_, red_);
 		stats_.setTextColor(Color::White);
 		//shuffle(packages_.begin(), packages_.end(), rnd);
@@ -147,8 +146,53 @@ public:
 		}
 	}
 
+	void changePackage(int ind) {
+		RenderWindow window(VideoMode(600, 400), "change item", Style::Close | Style::Titlebar);
+		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
+		days_field.setTitle(L"Количество дней", 17, Color::White);
+		days_field.setTitlePosition({ 232, 100 });
+		days_field.setOnlyNumbers(true);
+		while (window.isOpen()) {
+			window.clear(back_color_);
+			Event event;
+			Vector2i mouse_position = Mouse::getPosition(window);
+			while (window.pollEvent(event)) {
+				if (event.type == Event::Closed) {
+					window.close();
+				}
+				days_field.change(event, mouse_position);
+			}
+
+			days_field.draw(window);
+
+			window.display();
+		}
+	}
+
+	void changeMarket(int ind) {
+		RenderWindow window(VideoMode(600, 400), "change item", Style::Close | Style::Titlebar);
+		InputField days_field({ 200, 40 }, { 200, 50 }, grey_, 1);
+		days_field.setTitle(L"Количество дней", 17, Color::White);
+		days_field.setTitlePosition({ 232, 100 });
+		days_field.setOnlyNumbers(true);
+		while (window.isOpen()) {
+			window.clear(back_color_);
+			Event event;
+			Vector2i mouse_position = Mouse::getPosition(window);
+			while (window.pollEvent(event)) {
+				if (event.type == Event::Closed) {
+					window.close();
+				}
+				days_field.change(event, mouse_position);
+			}
+
+			days_field.draw(window);
+
+			window.display();
+		}
+	}
+
 	void play() {
-		int temp_balance = 0;
 		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
 			bool end = false, check = true;
@@ -173,14 +217,14 @@ public:
 							shelves_[i].setTitlePosition(Vector2f(86, 422 + 81 * i - value));
 						}
 					}
-					for (auto& now : shelves_) {
-						if (now.pressed(mouse_position, event) && insideArea(mouse_position)) {
-							// open 
+					for (int i = 0; i < shelves_.size(); ++i) {
+						if (shelves_[i].pressed(mouse_position, event) && insideArea(mouse_position)) {
+							changePackage(i);
 						}
 					}
-					for (auto& now : market_buttons_) {
-						if (now.pressed(mouse_position, event)) {
-							// open
+					for (int i = 0; i < market_buttons_.size(); ++i) {
+						if (market_buttons_[i].pressed(mouse_position, event)) {
+							changeMarket(i);
 						}
 					}
 
@@ -221,8 +265,7 @@ public:
 				shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(stock_->getCaseCount(i)) +
 					L" packages" + L" - " + std::to_wstring(stock_->getCost(i)) + L" $", 30, Color::White);
 			}
-			stats_.addValue(stock_->getBalance() - temp_balance);
-			temp_balance = stock_->getBalance();
+			stats_.addValue(stock_->getBalance());
 		}
 	}
 
@@ -244,7 +287,6 @@ public:
 	}
 
 private:
-	// все что нужно заранее (строго в фронте)
 	Color back_color_, green_, red_, grey_;
 	std::vector<RectangleShape> edges_;
 	Button manager_choose_, types_choose_;
