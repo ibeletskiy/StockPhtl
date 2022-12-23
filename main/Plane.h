@@ -177,6 +177,14 @@ public:
 
 			window.display();
 		}
+		int value = stock_->getPrice(ind), discount_value = stock_->getDiscount(ind);
+		if (cost.getValue() != L"") {
+			value = std::min(50, std::stoi(cost.getValue()));
+		}
+		if (discount.getValue() != L"") {
+			discount_value = std::min(40, std::stoi(discount.getValue()));
+		}
+		stock_->setPrice(ind, value, discount_value);
 	}
 
 	void changeMarket(int ind) {
@@ -195,9 +203,7 @@ public:
 				}
 				customers.change(event, mouse_position);
 			}
-
 			customers.draw(window);
-
 			window.display();
 		}
 	}
@@ -230,6 +236,10 @@ public:
 					for (int i = 0; i < shelves_.size(); ++i) {
 						if (shelves_[i].pressed(mouse_position, event) && insideArea(mouse_position)) {
 							changePackage(i);
+							for (int i = 0; i < shelves_.size(); ++i) {
+								shelves_[i].setTitle(packages_[i].getName() + L" - " + std::to_wstring(stock_->getCaseCount(i)) +
+									L" packages" + L" - " + std::to_wstring(stock_->getCost(i)) + L" $", 30, Color::White);
+							}
 						}
 					}
 					for (int i = 0; i < market_buttons_.size(); ++i) {

@@ -48,6 +48,14 @@ int Stock::getCost(int i) {
 	return items_[i].getActual();
 }
 
+int Stock::getPrice(int i) {
+	return items_[i].getPrice();
+}
+
+int Stock::getDiscount(int i) {
+	return items_[i].getDiscount();
+}
+
 int Stock::getBalance() {
 	return balance_;
 }

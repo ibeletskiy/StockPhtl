@@ -18,6 +18,10 @@ public:
 
 	int getCost(int i);
 
+	int getDiscount(int i);
+
+	int getPrice(int i);
+
 	int getBalance();
 
 	void getDelivery();
