@@ -12,6 +12,7 @@ public:
 	void setTitlePosition(Vector2f pos);
 	void setButtonPosition(Vector2f pos);
 	void setButtonSize(Vector2f size, int size_thickness = 0);
+	Vector2f getPosition();
 	void setButtonColor(Color fill_color, Color outline_color = { 255, 255, 255, 255 });
 	virtual bool contains(const Vector2i& mouse);
 	bool pressed(Vector2i& mouse, Event now);

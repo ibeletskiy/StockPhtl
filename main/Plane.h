@@ -64,6 +64,13 @@ public:
 		stock_->setManager(manager_);
 	}
 
+	bool insideArea(Vector2i mouse_position) {
+		return (mouse_position.y >= edges_[0].getPosition().y + edges_[0].getSize().y &&
+			mouse_position.y <= edges_[3].getPosition().y &&
+			mouse_position.x >= edges_[1].getPosition().x + edges_[1].getSize().x &&
+			mouse_position.x <= edges_[2].getPosition().x);
+	}
+
 	Plane() {
 		back_color_ = Color(13, 18, 43, 255);
 		green_ = Color(130, 209, 25, 255);
@@ -85,16 +92,18 @@ public:
 		stats_ = Statistic();
 		manager_choose_ = Button();
 		types_choose_ = Button();
-		bar_ = ScrollBar();
+		bar_ = ScrollBar(12, 565, { 30, 400 });
+		bar_.setCircleColor(Color::White);
+		bar_.setLineColor(grey_);
 		days_ = 1;
 		types_ = 0;
 		markets_cnt_ = 0;
 		getStart();
 		while (types_ < packages_.size()) packages_.pop_back();
-		// где то тут должны быть инициализация склада магазинов и поставщика, но пока что ее забыли
-		shelves_.resize(6);
+		initialization();
+		shelves_.resize(10);
 		for (int i = 0; i < shelves_.size(); ++i) {
-			shelves_[i] = Button({ 740, 79 }, Vector2f(60, 400 + 81 * i), green_);
+			shelves_[i] = Button({ 738, 79 }, Vector2f(61, 401 + 81 * i), green_, 1);
 		}
 		/*market_buttons_.resize(markets_cnt_);
 		for (int i = 0; i < market_buttons_.size(); ++i) {
@@ -118,13 +127,33 @@ public:
 	void play() {
 		RenderWindow window(VideoMode(1400, 1000), "simulation", Style::Close | Style::Titlebar);
 		for (int day = 0; day < days_; ++day) {
-			while (window.isOpen()) {
-				window.clear(Color::White);
+			bool end = false, check = true;
+			while (window.isOpen() && check) {
+				window.clear(back_color_);
 				Event event;
 				Vector2i mouse_position = Mouse::getPosition(window);
 				while (window.pollEvent(event)) {
 					if (event.type == Event::Closed) {
 						window.close();
+						end = true;
+					}
+					if (event.type == Event::KeyPressed && event.key.code == Keyboard::Enter) {
+						check = false;
+						break;
+					}
+					bar_.changeCircle(mouse_position, event);
+					if (bar_.isChosen()) {
+						double value = bar_.getValue() * (shelves_.back().getPosition().y - shelves_[0].getPosition().y);
+						for (int i = 0; i < shelves_.size(); ++i) {
+							shelves_[i].setButtonPosition(Vector2f(60, 400 + 81 * i - value));
+						}
+					}
+					if (insideArea(mouse_position)) {
+						for (auto& now : shelves_) {
+							if (now.pressed(mouse_position, event)) {
+								// open 
+							}
+						}
 					}
 				}
 				for (auto& now : shelves_) {
@@ -142,7 +171,8 @@ public:
 				}
 				window.display();
 			}
-			// тут должно быть все исполнение кода 
+			if (end) break;
+			performDay();
 		}
 	}
 

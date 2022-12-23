@@ -6,18 +6,22 @@ Button::Button(Vector2f size, Vector2f position, Color color, float border, std:
 	field_.setSize(size);
 	field_.setPosition(position);
 	field_.setFillColor(color);
-	field_.setOutlineThickness(border);
 	field_.setOutlineColor(Color(255, 255, 255, 255));
 	backlight_thickness_ = border;
 	title_.setString(name);
 	title_.setCharacterSize(size_ch);
 	title_.setFillColor(title_color);
+	backlight_ = 0;
 }
 
 void Button::setTitle(std::wstring name, int size, Color color) {
 	title_.setString(name);
 	title_.setCharacterSize(size);
 	title_.setFillColor(color);
+}
+
+Vector2f Button::getPosition() {
+	return field_.getPosition();
 }
 
 void Button::setTitlePosition(Vector2f pos) {

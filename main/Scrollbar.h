@@ -15,6 +15,7 @@ public:
 	bool contains(Vector2i mouse_position);
 	bool pressed(Vector2i mouse_position, Event event);
 	void changeCircle(Vector2i mouse_position, Event event);
+	bool isChosen();
 	double getValue();
 	void draw(RenderWindow& window);
 

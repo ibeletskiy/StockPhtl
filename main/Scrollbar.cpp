@@ -54,6 +54,10 @@ void ScrollBar::changeCircle(Vector2i mouse_position, Event event) {
 	}
 }
 
+bool ScrollBar::isChosen() {
+	return pressed_;
+}
+
 double ScrollBar::getValue() {
 	return part_.getSize().y / line_.getSize().y;
 }
