@@ -47,6 +47,10 @@ public:
 		return price_;
 	}
 
+	int getDiscount() const {
+		return discount_;
+	}
+
 	int getLastDay() const {
 		return last_day_;
 	}
