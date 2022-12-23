@@ -5,7 +5,7 @@
 static std::mt19937 rnd(std::chrono::steady_clock().now().time_since_epoch().count());
 
 Market::Market(std::vector<Package>& basic_shelf) {
-	customer_count_ = 100 + rnd() % 1000;
+	customer_count_ = 10 + rnd() % 50;
 	for (Package package : basic_shelf) {
 		shelf_.push_back(package);
 		max_count_.push_back(customer_count_ * package.getInterest() * package.getDuration());

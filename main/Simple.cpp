@@ -7,7 +7,7 @@ void Simple::makeOrder(std::vector <Package>& order) {
 			item.setCount(0);
 		}
 		else {
-			item.setCount(item.getCount() - stock_->ordered_[item.getNumber()]);
+			item.setCount(std::max(item.getCount() - stock_->ordered_[item.getNumber()], 0));
 		}
 	}
 }

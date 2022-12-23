@@ -65,7 +65,7 @@ public:
 		}
 		provider_ = new Provider(packages_);
 		for (int i = 0; i < packages_.size(); ++i) {
-			max_count_.push_back(50);
+			max_count_.push_back(100);
 		}
 		stock_ = new Stock(markets_, packages_, max_count_, provider_);
 		manager_ = new Smart();

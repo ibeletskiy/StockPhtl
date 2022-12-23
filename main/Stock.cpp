@@ -22,6 +22,9 @@ void Stock::getDelivery() {
 		case_[package.getNumber()].push_back(package);
 		ordered_[package.getNumber()]--;
 	}
+	for (int i = 0; i < case_.size(); ++i) {
+		while (case_[i].size() > max_count_[i]) case_[i].pop_front();
+	}
 }
 
 void Stock::makeOrder() {
@@ -71,6 +74,7 @@ void Stock::writeOff() {
 }
 
 void Stock::sendDelivery() {
+	++day_;
 	for (int i = 0; i < markets_.size(); ++i) {
 		std::vector<Package> to_send;
 		for (int j = 0; j < orders_.size(); ++j) {
