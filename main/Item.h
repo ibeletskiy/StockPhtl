@@ -51,6 +51,10 @@ public:
 		return last_day_;
 	}
 
+	int getWholesale() const {
+		return wholesale_;
+	}
+
 protected:
 	std::wstring name_;
 	int number_;

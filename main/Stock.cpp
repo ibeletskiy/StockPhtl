@@ -36,6 +36,7 @@ void Stock::makeOrder() {
 	provider_->getOrder(order);
 	for (int i = 0; i < items_.size(); ++i) {
 		ordered_[i] += order[i].getCount();
+		balance_ -= order[i].getCount() * items_[i].getCount() * items_[i].getWholesale();
 	}
 }
 
@@ -64,6 +65,7 @@ void Stock::getOrder() {
 	}
 }
 
+
 void Stock::writeOff() {
 	for (auto& v : case_) {
 		while (!v.empty() && v[0].getLastDay() < day_) {
@@ -79,7 +81,8 @@ void Stock::sendDelivery() {
 		std::vector<Package> to_send;
 		for (int j = 0; j < orders_.size(); ++j) {
 			while (!case_[j].empty() && case_[j][0].getCount() <= orders_[i][j]) {
-				balance_ += case_[j][0].getActual();
+				balance_ += items_[j].getActual() * case_[j][0].getCount();
+				orders_[i][j] -= case_[j][0].getCount();
 				to_send.push_back(case_[j][0]);
 				case_[j].pop_front();
 			}
