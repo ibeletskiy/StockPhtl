@@ -70,9 +70,6 @@ public:
 			max_count_.push_back(50);
 		}
 		stock_ = new Stock(markets_, packages_, max_count_, provider_);
-		manager_ = new Simple();
-		manager_->setStock(stock_);
-		stock_->setManager(manager_);
 	}
 
 	bool insideArea(Vector2i mouse_position) {
@@ -116,8 +113,11 @@ public:
 		stats_ = Statistic({ 1300, 165 }, { 65, 35 }, days_);
 		stats_.setColor(green_, red_);
 		stats_.setTextColor(Color::White);
-		//shuffle(packages_.begin(), packages_.end(), rnd);
+		shuffle(packages_.begin(), packages_.end(), rnd);
 		while (types_ < packages_.size()) packages_.pop_back();
+		for (int i = 0; i < packages_.size(); ++i) {
+			packages_[i].setNumber(i);
+		}
 		initialization();
 		shelves_.resize(types_);
 		for (int i = 0; i < shelves_.size(); ++i) {
@@ -136,6 +136,10 @@ public:
 	}
 
 	void performDay() {
+		if (!smart_) manager_ = new Simple();
+		else manager_ = new Smart();
+		manager_->setStock(stock_);
+		stock_->setManager(manager_);
 		stock_->sendDelivery();
 		provider_->performDay();
 		stock_->getDelivery();
