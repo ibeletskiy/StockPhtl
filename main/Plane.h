@@ -206,6 +206,11 @@ public:
 			customers.draw(window);
 			window.display();
 		}
+		int value = markets_[ind]->getCount();
+		if (customers.getValue() != L"") {
+			value = std::min(75, std::stoi(customers.getValue()));
+		}
+		markets_[ind]->setCount(value);
 	}
 
 	void play() {
