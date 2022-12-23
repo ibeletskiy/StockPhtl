@@ -15,6 +15,8 @@ public:
 
 	bool operator<(Market other);
 
+	void setCount(int count);
+
 	friend void Smart::makeOrder(std::vector <Package>& items);
 
 private:
